@@ -1,0 +1,62 @@
+<div class="container">
+
+    <div class="row justify-content-center allscreen" *ngIf="step===1">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-5 col-sm-10 text-center">
+                <img src="../../../assets/img/search.svg" alt="" width="50%">
+                <h2></h2>
+            </div>
+        </div>
+
+        <div class="col-lg-10 col-md-12 col-sm-12 shadow p-5 text-center border-radio">
+            <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Ingrese un codigo">
+            <button *ngIf="!loading" class="btn btn-success btn-block btn-lg m-4 shadow" [disabled]="identification === ''" (click)="search()">
+                Consultar
+            </button>
+            <button *ngIf="loading" class="btn btn-success btn-block btn-lg m-4 shadow" [disabled]="identification === ''" (click)="search()">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Buscando...
+            </button>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-5 col-sm-10 text-center text-dark">
+                <h4>Consulta tus resultados de una forma mas rapida sin contra tiempos!</h4>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row justify-content-center allscreen" *ngIf="step===2">
+        <div class="col-lg-11 col-md-11 col-sm-11 text-center">
+            <div class="row justify-content-around">
+                <div class="col-6 text-start">
+                    <p class="btn btn-secondary mt-1" (click)="back()"><span><i class="fa-solid fa-arrow-left"></i></span></p>
+                </div>
+                <div class="col-6 pt-2 text-end text-success">
+                    <h4><b>Resultados</b></h4>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-4 col-sm-11 p-2" *ngFor="let document of listDocuments; let i = index">
+
+                    <div class="card shadow d-flex-sm justify-content-space-around">
+                        <div class="card-body ">
+                            <div class="p-2">
+                                <img class="" width="100px" src="../../../assets/img/pdf.png" alt="File">
+                            </div>
+                            <div class="text-start">
+                                <p><b>Nombre:</b><br> {{ document.name }}</p>
+                                <p><b>Descripcion:</b><br> {{ document.description }}</p>
+                                <p><b>Fecha:</b><br>{{ getDate(document.created_at) }}</p>
+                                <a href="https://api-rcs-lqtwb.ondigitalocean.app/{{getFile(document.file)}}" style="width:100%;" target="_blank" class="btn btn-success text-white btn-lg">Ver resultados</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

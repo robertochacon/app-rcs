@@ -1,0 +1,23 @@
+input[type=text] {
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+    padding: 8px;
+    color: gray;
+}
+
+input[type=text]:focus {
+    border-color: transparent;
+}
+
+.border-radio {
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.container .allscreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

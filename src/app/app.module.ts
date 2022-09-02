@@ -8,13 +8,17 @@ import { AppComponent } from './app.component';
 import { ConsultingComponent } from './components/consulting/consulting.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DocumentsComponent } from './components/documents/documents.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConsultingComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    DashboardComponent,
+    DocumentsComponent
   ],
   imports: [
     BrowserModule,

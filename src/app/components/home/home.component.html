@@ -12,9 +12,9 @@
         </div>
 
         <div class="col-lg-10 col-md-12 col-sm-12 shadow p-5 text-center border-radio">
-            <input type="text" class="form-control shadow mt-3" maxLength="11" placeholder="Ingrese un identificacion">
-            <input type="password" class="form-control shadow mt-3" maxLength="11" placeholder="Ingrese su clave">
-            <button *ngIf="!loading" class="btn btn-success btn-block btn-lg m-4 shadow">
+            <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Ingrese un identificacion">
+            <input type="password" [(ngModel)]="password" class="form-control shadow mt-3" maxLength="11" placeholder="Ingrese su clave">
+            <button *ngIf="!loading" class="btn btn-success btn-block btn-lg m-4 shadow" [disabled]="identification === '' && password === ''" (click)="login()">
                 Ingresar
             </button>
             <button *ngIf="loading" class="btn btn-success btn-block btn-lg m-4 shadow">

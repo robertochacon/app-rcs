@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -21,26 +22,25 @@ export class HomeComponent implements OnInit {
   }
 
   login(): void{
-    this.loading = false;
+    this.loading = true;
+    this.loginError = false;
+
     this._authentication.login(this.identification,this.password).subscribe((response)=>{
-      console.log(response);
 
-      if(response !== undefined){
-
-        this.loginError = false;
-        localStorage.setItem("user", response.user);
+        localStorage.setItem("name", response.user.name);
+        localStorage.setItem("user", JSON.stringify(response.user));
         localStorage.setItem("token", response.token);
       
         setTimeout(() => {
+          this.loading = false;
           this.router.navigate(["/dashboard"]);
-        }, 1000);
+        }, 2000);
 
-      }else{
-        this.loginError = true;
-      }
-
+    }, error => {
       this.loading = false;
+      this.loginError = true;
     })
+
   }
 
 }

@@ -1,1 +1,41 @@
-<p>documents works!</p>
+<app-navbarinto></app-navbarinto>
+
+<div class="container p-5" *ngIf="action==='list'">
+    <div class="row mt-2">
+        <h3>Listado de resultados</h3>
+        <div class="col-6 text-start">
+            <p class="btn btn-secondary mt-1"><span><i class="fa-solid fa-arrow-left"></i></span></p>
+        </div>
+    </div>
+</div>
+
+<div class="container p-5" *ngIf="action==='register'">
+    <div class="row mt-2">
+        <h3>Registro de resultado</h3>
+        <div class="col-6 text-start">
+            <p class="btn btn-secondary mt-1"><span><i class="fa-solid fa-arrow-left"></i></span></p>
+        </div>
+    </div>
+    <div class="row justify-content-around allscreen">
+
+        <div class="col-lg-5 col-md-5 col-sm-10 text-center">
+            <img src="../../../assets/img/search.svg" alt="" width="50%">
+            <h2></h2>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 shadow text-center border-radio">
+            <h5>Información general</h5>
+            <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Digite una identificacion">
+            <input type="text" [(ngModel)]="name" class="form-control shadow mt-3" maxLength="11" placeholder="Digite un nombre">
+            <textarea [(ngModel)]="description" class="form-control shadow mt-3" rows="3" placeholder="Digite una descripcion"></textarea>
+            <input [(ngModel)]="file" type="file" class="form-control shadow mt-3" maxLength="11" placeholder="Digite un codigo">
+            <button *ngIf="!loading" class="btn btn-success btn-block btn-lg m-4 shadow" (click)="save()">
+                Registrar
+            </button>
+            <button *ngIf="loading" class="btn btn-success btn-block btn-lg m-4 shadow" (click)="save()">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Registrando...
+            </button>
+        </div>
+    </div>
+</div>

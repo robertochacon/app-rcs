@@ -11,10 +11,17 @@ export class ConsultingComponent implements OnInit {
   listDocuments: any[] = [];
   loading = false;
   step = 1;
+  session = false;
 
   constructor(private _documents: DocumentsService) { }
 
   ngOnInit(): void {
+    const session = localStorage.getItem('token');
+    if(session && session !== undefined){
+      this.session = true
+    }else{
+      this.session = false
+    }
   }
 
   search(){

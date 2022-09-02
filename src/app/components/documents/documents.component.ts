@@ -6,10 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./documents.component.css']
 })
 export class DocumentsComponent implements OnInit {
+  action = 'register';
+  loading = false;
+  identification = '';
+  name = '';
+  description = '';
+  file: any = null;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  save(): void {
+    this.loading = true;
   }
 
 }

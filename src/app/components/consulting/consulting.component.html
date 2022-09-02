@@ -1,5 +1,10 @@
+<app-navbarinto *ngIf="session"></app-navbarinto>
 <div class="container">
-
+    <div class="row mt-2" *ngIf="!session">
+        <div class="col-6 text-start">
+            <p routerLink="" class="btn btn-secondary mt-1"><span><i class="fa-solid fa-arrow-left"></i></span></p>
+        </div>
+    </div>
     <div class="row justify-content-center allscreen" *ngIf="step===1">
 
         <div class="row justify-content-center">

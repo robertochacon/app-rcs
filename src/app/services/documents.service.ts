@@ -7,13 +7,18 @@ import { Observable } from 'rxjs';
 })
 export class DocumentsService {
 
-  url = 'https://api-rcs-lqtwb.ondigitalocean.app/api/documents/';
+  url = 'https://api-rcs-lqtwb.ondigitalocean.app/api/documents';
 
   constructor(private http: HttpClient) { }
 
   getDocuments(identification: string): Observable<any>{
     const url = this.url+identification;
     return this.http.get(url);
+  }
+
+  setDocuments(json: any): Observable<any>{
+    const url = this.url;
+    return this.http.post(url, json);
   }
 
 }

@@ -7,7 +7,7 @@ import { DocumentsService } from 'src/app/services/documents.service';
   styleUrls: ['./consulting.component.css']
 })
 export class ConsultingComponent implements OnInit {
-  identification = "40237252669";
+  identification = "";
   listDocuments: any[] = [];
   loading = false;
   step = 1;

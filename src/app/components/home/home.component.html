@@ -15,8 +15,8 @@
             <div class="alert alert-danger" role="alert" *ngIf="loginError">
                 Su identificacion o su clave esta incorrecta, verifique y vuelva a intentar
             </div>
-            <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Ingrese un identificacion">
-            <input type="password" [(ngModel)]="password" class="form-control shadow mt-3" maxLength="11" placeholder="Ingrese su clave">
+            <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Digite su identificacion">
+            <input type="password" [(ngModel)]="password" class="form-control shadow mt-3" maxLength="11" placeholder="Digite su clave">
             <button *ngIf="!loading" class="btn btn-success btn-block btn-lg m-4 shadow" [disabled]="identification === '' && password === ''" (click)="login()">
                 Ingresar
             </button>

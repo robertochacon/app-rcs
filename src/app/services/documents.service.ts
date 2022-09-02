@@ -12,7 +12,7 @@ export class DocumentsService {
   constructor(private http: HttpClient) { }
 
   getDocuments(identification: string): Observable<any>{
-    const url = this.url+identification;
+    const url = this.url+'/'+identification;
     return this.http.get(url);
   }
 

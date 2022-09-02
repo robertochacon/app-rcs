@@ -12,6 +12,7 @@ export class ConsultingComponent implements OnInit {
   loading = false;
   step = 1;
   session = false;
+  result = '';
 
   constructor(private _documents: DocumentsService) { }
 
@@ -27,10 +28,19 @@ export class ConsultingComponent implements OnInit {
   search(){
     this.loading = true;
     this._documents.getDocuments(this.identification).subscribe((response)=>{
-      console.log(response.data);
-      this.listDocuments = response.data;
-      this.loading = false;
-      this.step = 2;
+      console.log(response);
+
+      if(response.data.length >= 1){
+        this.listDocuments = response.data;
+        this.loading = false;
+        this.step = 2;
+      }else{
+        this.result = 'noFound';
+        this.loading = false;
+      }
+
+    },error=>{
+      this.result = 'fail';
     })
   }
 

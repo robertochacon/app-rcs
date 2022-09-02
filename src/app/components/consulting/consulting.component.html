@@ -5,7 +5,7 @@
             <p routerLink="" class="btn btn-secondary mt-1"><span><i class="fa-solid fa-arrow-left"></i></span></p>
         </div>
     </div>
-    <div class="row justify-content-center allscreen" *ngIf="step===1">
+    <div class="row justify-content-center allscreen pt-3" *ngIf="step===1">
 
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-5 col-sm-10 text-center">
@@ -15,7 +15,14 @@
         </div>
 
         <div class="col-lg-10 col-md-12 col-sm-12 shadow p-5 text-center border-radio">
-            <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Ingrese un codigo">
+            <div class="alert alert-info" role="alert" *ngIf="result === 'noFound'">
+                No se encuentran resultados.
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="result === 'fail'">
+                Error al buscar resultados.
+            </div>
+            <h3 style="font-weight:800;">Buscar resultados</h3>
+            <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Digite un codigo">
             <button *ngIf="!loading" class="btn btn-success btn-block btn-lg m-4 shadow" [disabled]="identification === ''" (click)="search()">
                 Consultar
             </button>
@@ -27,13 +34,13 @@
 
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-5 col-sm-10 text-center text-dark">
-                <h4>Consulta tus resultados de una forma mas rapida sin contra tiempos!</h4>
+                <h5>Consulta tus resultados de una forma mas rapida sin contra tiempos!</h5>
             </div>
         </div>
 
     </div>
 
-    <div class="row justify-content-center allscreen" *ngIf="step===2">
+    <div class="row justify-content-center allscreen pt-3" *ngIf="step===2">
         <div class="col-lg-11 col-md-11 col-sm-11 text-center">
             <div class="row justify-content-around">
                 <div class="col-6 text-start">

@@ -11,6 +11,11 @@ export class DocumentsService {
 
   constructor(private http: HttpClient) { }
 
+  getAllDocuments(): Observable<any>{
+    const url = this.url;
+    return this.http.get(url);
+  }
+
   getDocuments(identification: string): Observable<any>{
     const url = this.url+'/'+identification;
     return this.http.get(url);

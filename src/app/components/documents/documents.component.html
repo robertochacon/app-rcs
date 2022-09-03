@@ -1,6 +1,6 @@
 <app-navbarinto></app-navbarinto>
 
-<div class="container p-5" *ngIf="action==='list'">
+<div class="container p-5 text-center" *ngIf="action==='list'">
     <div class="mt-2 d-flex justify-content-between align-items-center">
         <div class="">
             <h3>Lista de resultados</h3>
@@ -8,6 +8,40 @@
         <div class="col-lg-0 text-start">
             <p class="btn btn-primary mt-1" (click)="action='register'"><i class="fa-solid fa-plus d-lg-none d-md-none d-sm-block"></i><span class="d-none d-lg-block d-md-block"><i class="fa-solid fa-plus"></i> Registrar resultado</span></p>
         </div>
+    </div>
+
+    <div class="pt-5" *ngIf="loading">
+        <h3>Cargando</h3>
+        <div class="spinner-border pt-2" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div *ngIf="!loading" class="bg-light p-3 border shadow table-responsive">
+        <table class="table table-hover responsive" id="listDocuments" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Identificacion</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Archivo</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let document of listDocuments">
+                    <td>{{document.identification}}</td>
+                    <td>{{document.name}}</td>
+                    <td>{{document.description}}</td>
+                    <td>
+                        <button class="btn btn-info text-white">Visualizar</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 

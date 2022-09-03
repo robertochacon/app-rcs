@@ -1,23 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents.service';
+declare const $: any;
 
 @Component({
   selector: 'app-documents',
   templateUrl: './documents.component.html',
   styleUrls: ['./documents.component.css']
 })
+
 export class DocumentsComponent implements OnInit {
   action = 'list';
   loading = false;
+  loadData = false;
   result = '';
   identification = '';
   name = '';
   description = '';
   file: any = [];
+  listDocuments: any[] = [];
 
   constructor(private _documents: DocumentsService) { }
 
   ngOnInit(): void {
+    this.getAllDocuments();
+  }
+
+  getAllDocuments(){
+    this.loading = true;
+
+    this._documents.getAllDocuments().subscribe((response)=>{
+
+      this.listDocuments = response.data;
+
+      setTimeout(function(){
+        $('#listDocuments').DataTable();
+      },100);
+      this.loading = false;
+      
+    }, error=>{
+        this.loadData = false;
+        this.loading = false;
+    })
+
   }
 
   getFile(event: any){
@@ -55,5 +80,4 @@ export class DocumentsComponent implements OnInit {
     }, 5000);
 
   }
-
 }

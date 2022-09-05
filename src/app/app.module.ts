@@ -11,6 +11,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DocumentsComponent } from './components/documents/documents.component';
 import { NavbarintoComponent } from './components/navbarinto/navbarinto.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NavbarintoComponent } from './components/navbarinto/navbarinto.componen
     NavbarComponent,
     DashboardComponent,
     DocumentsComponent,
-    NavbarintoComponent
+    NavbarintoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

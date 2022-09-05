@@ -47,7 +47,8 @@ a:hover {
 i,
 span,
 a {
-    display: inline-block
+    display: inline-block;
+    color: white;
 }
 
 audio,

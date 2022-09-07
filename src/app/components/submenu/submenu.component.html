@@ -1,0 +1,12 @@
+<div>
+    <img src="../../../assets/img/logo/logo.png" class=" pt-2 pb-2 mt-1 mb-1" width="100px" alt="">
+
+    <a routerLink="/dashboard" [ngClass]="page==='dashboard'?'selected':''" class="ml-3 pl-3 pt-3 pb-3 mt-2 mb-2 d-flex align-items-center btns"><i class="fa-solid fa-house mr-2 text-black"></i> Inicio</a>
+
+    <a routerLink="/documents" [ngClass]="page==='documents'?'selected':''" class="ml-3 pl-3 pt-3 pb-3 mt-2 mb-2 d-flex align-items-center btns"><i class="fa-solid fa-file mr-2 text-black"></i> Documentos</a>
+
+    <a routerLink="/consulting" [ngClass]="page==='consulting'?'selected':''" class="ml-3 pl-3 pt-3 pb-3 mt-2 mb-2 d-flex align-items-center btns"><i class="fa-solid fa-magnifying-glass mr-2 text-black"></i> Consultar</a>
+
+    <a [ngClass]="page" (click)="salir()" class="ml-3 pl-3 pt-3 pb-3 mt-2 mb-2 d-flex align-items-center btns" style="cursor:pointer;"><i class="fa-solid fa-right-from-bracket mr-2 text-black"></i> Salir</a>
+
+</div>

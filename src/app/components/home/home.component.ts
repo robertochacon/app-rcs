@@ -8,9 +8,14 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   
+  loading=true
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    setTimeout(()=>{
+      this.loading = false;
+    },2000)
   }
 
 }

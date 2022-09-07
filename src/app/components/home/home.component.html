@@ -1,4 +1,4 @@
-<div class="preloader">
+<div class="preloader" [ngClass]="loading===true?'d-block show':'d-none hide'">
     <div class="loader">
         <div class="ytp-spinner">
             <div class="ytp-spinner-container">
@@ -45,6 +45,9 @@
                                 <li class="nav-item">
                                     <a class="page-scroll" href="#testimonial">Testimonios</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a routerLink="/login" class="page-scroll">Login</a>
+                                </li>
                             </ul>
                         </div>
                     </nav>
@@ -63,7 +66,7 @@
                 <div class="hero-content">
                     <h1 class="wow fadeInUp" data-wow-delay=".2s">Consulta desde casa</h1>
                     <h3 class="wow fadeInUp" data-wow-delay=".2s"><span>Evitando contratiempos</span> </h3>
-                    <a href="javascript:void(0)" routerLink="/consulting" class="main-btn shadow btn-hover wow fadeInUp" data-wow-delay=".6s">Consultar</a>
+                    <a href="javascript:void(0)" routerLink="/consulting-out" class="main-btn shadow btn-hover wow fadeInUp" data-wow-delay=".6s">Consultar</a>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -74,13 +77,13 @@
         </div>
     </div>
 </section>
-<section id="services" class="service-section pt-150">
+<section id="services" class="service-section pt-150 bg-white">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-8">
                 <div class="section-title text-center mb-70">
-                    <span class="wow fadeInUp" data-wow-delay=".2s">Delivery Services</span>
-                    <h1 class="wow fadeInUp" data-wow-delay=".4s">All Essentials You Need</h1>
+                    <span class="wow fadeInUp" data-wow-delay=".2s">Servicio de consulta</span>
+                    <h1 class="wow fadeInUp" data-wow-delay=".4s">Todo lo que necesitas</h1>
                 </div>
             </div>
         </div>
@@ -479,3 +482,10 @@
 <a href="#" class="scroll-top btn-hover">
     <i class="lni lni-chevron-up"></i>
 </a>
+
+<script>
+    setTimeout(function() {
+        document.querySelector('.preloader').style.opacity = '0';
+        document.querySelector('.preloader').style.display = 'none';
+    }, 500);
+</script>

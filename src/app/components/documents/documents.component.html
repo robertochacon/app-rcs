@@ -1,83 +1,103 @@
-<app-navbarinto></app-navbarinto>
+<!-- <app-navbarinto></app-navbarinto> -->
 
-<div class="container p-5 text-center" *ngIf="action==='list'">
-    <div class="mt-2 d-flex justify-content-between align-items-center">
-        <div class="">
-            <h3>Lista de resultados</h3>
-        </div>
-        <div class="col-lg-0 text-start">
-            <p class="btn btn-primary mt-1" (click)="action='register'"><i class="fa-solid fa-plus d-lg-none d-md-none d-sm-block"></i><span class="d-none d-lg-block d-md-block"><i class="fa-solid fa-plus"></i> Registrar resultado</span></p>
-        </div>
+<div class="row without-borders d-none d-lg-flex d-md-flex">
+
+    <div class="col-lg-2 col-md-3 col-sm-12 text-center without-borders" style="background:#96bc96;">
+        <app-submenu [page]="'documents'"></app-submenu>
     </div>
 
-    <div class="pt-5" *ngIf="loading">
-        <h3>Cargando</h3>
-        <div class="spinner-border pt-2" style="width: 3rem; height: 3rem;" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-    </div>
+    <div class="col-lg-10 col-md-9 col-sm-12">
 
-    <div *ngIf="!loading" class="bg-light p-3 border shadow table-responsive">
-        <table class="table table-hover responsive" id="listDocuments" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Identificacion</th>
-                    <th>Nombre</th>
-                    <th>Descripcion</th>
-                    <th>Archivo</th>
-                    <th>Accion</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let document of listDocuments">
-                    <td>{{document.identification}}</td>
-                    <td>{{document.name}}</td>
-                    <td>{{document.description}}</td>
-                    <td>
-                        <button class="btn btn-info text-white">Visualizar</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger">Eliminar</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="container p-5 text-center" *ngIf="action==='list'">
+            <div class="mt-2 d-flex justify-content-between align-items-center">
+                <div class="">
+                    <h3>Lista de resultados</h3>
+                </div>
+                <div class="col-lg-0 text-start">
+                    <p class="btn btn-primary mt-1" (click)="action='register'"><i class="fa-solid fa-plus d-lg-none d-md-none d-sm-block"></i><span class="d-none d-lg-block d-md-block"><i class="fa-solid fa-plus"></i> Registrar resultado</span></p>
+                </div>
+            </div>
+
+            <div class="pt-5" *ngIf="loading">
+                <h3>Cargando</h3>
+                <div class="spinner-border pt-2" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+            <div *ngIf="!loading" class="bg-light p-3 border shadow table-responsive">
+                <table class="table table-hover responsive" id="listDocuments" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Identificacion</th>
+                            <th>Nombre</th>
+                            <th>Descripcion</th>
+                            <th>Archivo</th>
+                            <th>Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let document of listDocuments">
+                            <td>{{document.identification}}</td>
+                            <td>{{document.name}}</td>
+                            <td>{{document.description}}</td>
+                            <td>
+                                <button class="btn btn-info text-white">Visualizar</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="container p-5" *ngIf="action==='register'">
+            <div class="row mt-2">
+                <h3>Registro de resultado</h3>
+                <div class="col-6 text-start">
+                    <p class="btn btn-secondary mt-1" (click)="action='list'"><span><i class="fa-solid fa-arrow-left"></i></span></p>
+                </div>
+            </div>
+            <div class="row justify-content-around allscreen">
+
+                <div class="col-lg-5 col-md-5 col-sm-10 text-center">
+                    <img src="../../../assets/img/add_documents.svg" alt="" width="50%">
+                    <h2></h2>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 shadow text-center border-radio pt-3">
+                    <div class="alert alert-success" role="alert" *ngIf="result === 'ok'">
+                        Registro completado.
+                    </div>
+                    <div class="alert alert-danger" role="alert" *ngIf="result === 'fail'">
+                        No se pudo completar su registro.
+                    </div>
+                    <h5>Información general</h5>
+                    <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Digite una identificacion">
+                    <input type="text" [(ngModel)]="name" class="form-control shadow mt-3" maxLength="11" placeholder="Digite un nombre">
+                    <textarea [(ngModel)]="description" class="form-control shadow mt-3" rows="3" placeholder="Digite una descripcion"></textarea>
+                    <input (change)="getFile($event)" type="file" class="form-control shadow mt-3">
+                    <button *ngIf="!loading" [disabled]="name==='' || identification==='' || description===''" class="btn btn-success btn-block btn-lg m-4 shadow" (click)="save()">
+                        Registrar
+                    </button>
+                    <button *ngIf="loading" class="btn btn-success btn-block btn-lg m-4 shadow" (click)="save()">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Registrando...
+                    </button>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
-<div class="container p-5" *ngIf="action==='register'">
-    <div class="row mt-2">
-        <h3>Registro de resultado</h3>
-        <div class="col-6 text-start">
-            <p class="btn btn-secondary mt-1" (click)="action='list'"><span><i class="fa-solid fa-arrow-left"></i></span></p>
-        </div>
-    </div>
-    <div class="row justify-content-around allscreen">
 
-        <div class="col-lg-5 col-md-5 col-sm-10 text-center">
-            <img src="../../../assets/img/add_documents.svg" alt="" width="50%">
-            <h2></h2>
-        </div>
-
-        <div class="col-lg-6 col-md-6 col-sm-12 shadow text-center border-radio pt-3">
-            <div class="alert alert-success" role="alert" *ngIf="result === 'ok'">
-                Registro completado.
-            </div>
-            <div class="alert alert-danger" role="alert" *ngIf="result === 'fail'">
-                No se pudo completar su registro.
-            </div>
-            <h5>Información general</h5>
-            <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Digite una identificacion">
-            <input type="text" [(ngModel)]="name" class="form-control shadow mt-3" maxLength="11" placeholder="Digite un nombre">
-            <textarea [(ngModel)]="description" class="form-control shadow mt-3" rows="3" placeholder="Digite una descripcion"></textarea>
-            <input (change)="getFile($event)" type="file" class="form-control shadow mt-3">
-            <button *ngIf="!loading" [disabled]="name==='' || identification==='' || description===''" class="btn btn-success btn-block btn-lg m-4 shadow" (click)="save()">
-                Registrar
-            </button>
-            <button *ngIf="loading" class="btn btn-success btn-block btn-lg m-4 shadow" (click)="save()">
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                Registrando...
-            </button>
-        </div>
+<div class="d-flex justify-content-center align-items-center text-center d-sm-block d-lg-none d-md-none" style="height:100vh;">
+    <div>
+        <img class="mb-3" src="../../../assets/img/devices.svg" width="80%" alt="">
+        <h2 class="mb-3">Utilice una tableta o una pc para visualizar contenido.</h2>
+        <a routerLink="/" class="btn btn-success shadow">Pagina principal</a>
     </div>
 </div>

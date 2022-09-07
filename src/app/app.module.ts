@@ -12,6 +12,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DocumentsComponent } from './components/documents/documents.component';
 import { NavbarintoComponent } from './components/navbarinto/navbarinto.component';
 import { LoginComponent } from './components/login/login.component';
+import { SubmenuComponent } from './components/submenu/submenu.component';
+import { ConsultingOutComponent } from './components/consulting-out/consulting-out.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { LoginComponent } from './components/login/login.component';
     DashboardComponent,
     DocumentsComponent,
     NavbarintoComponent,
-    LoginComponent
+    LoginComponent,
+    SubmenuComponent,
+    ConsultingOutComponent
   ],
   imports: [
     BrowserModule,

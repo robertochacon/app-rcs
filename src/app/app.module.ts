@@ -14,6 +14,8 @@ import { NavbarintoComponent } from './components/navbarinto/navbarinto.componen
 import { LoginComponent } from './components/login/login.component';
 import { SubmenuComponent } from './components/submenu/submenu.component';
 import { ConsultingOutComponent } from './components/consulting-out/consulting-out.component';
+import { MessengerComponent } from './components/messenger/messenger.component';
+import { ShipmentsComponent } from './components/shipments/shipments.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { ConsultingOutComponent } from './components/consulting-out/consulting-o
     NavbarintoComponent,
     LoginComponent,
     SubmenuComponent,
-    ConsultingOutComponent
+    ConsultingOutComponent,
+    MessengerComponent,
+    ShipmentsComponent
   ],
   imports: [
     BrowserModule,

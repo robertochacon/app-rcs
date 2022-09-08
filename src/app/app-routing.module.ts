@@ -6,12 +6,16 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DocumentsComponent } from './components/documents/documents.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { MessengerComponent } from './components/messenger/messenger.component';
+import { ShipmentsComponent } from './components/shipments/shipments.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent},
+  {path: 'messengers', component: MessengerComponent},
+  {path: 'shipments', component: ShipmentsComponent},
   {path: 'documents', component: DocumentsComponent},
   {path: 'consulting', component: ConsultingComponent},
   {path: 'consulting-out', component: ConsultingOutComponent},

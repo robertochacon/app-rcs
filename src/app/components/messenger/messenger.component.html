@@ -3,16 +3,130 @@
 <div class="row without-borders d-none d-lg-flex d-md-flex">
 
     <div class="col-lg-2 col-md-3 col-sm-12 text-center without-borders" style="background:#96bc96;">
-        <app-submenu [page]="'dashboard'"></app-submenu>
+        <app-submenu [page]="'messengers'"></app-submenu>
     </div>
 
     <div class="col-lg-10 col-md-9 col-sm-12">
-        <div class="container bg-white p-5">
-            <h3>Messenger</h3>
-        </div>
-    </div>
 
+        <div class="container p-5 text-center" *ngIf="action==='list'">
+            <div class="mt-2 d-flex justify-content-between align-items-center">
+                <div class="">
+                    <h3>Lista de mensajeros</h3>
+                </div>
+                <div class="col-lg-0 text-start">
+                    <p class="btn btn-primary mt-1" (click)="action='register'"><i class="fa-solid fa-plus d-lg-none d-md-none d-sm-block"></i><span class="d-none d-lg-block d-md-block"><i class="fa-solid fa-plus"></i> Registrar mensajero</span></p>
+                </div>
+            </div>
+
+            <div class="pt-5" *ngIf="loading">
+                <h3>Cargando</h3>
+                <div class="spinner-border pt-2" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+            <div *ngIf="!loading" class="bg-light p-3 border shadow table-responsive">
+                <table class="table table-hover responsive" id="listMessengers" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Identificacion</th>
+                            <th>Telefono</th>
+                            <th>Direccion</th>
+                            <th>Correo</th>
+                            <th>Vehiculo</th>
+                            <th>Modelo</th>
+                            <th>Placa</th>
+                            <th>Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let messenger of listMessengers; let i = index;">
+                            <td>{{i}}</td>
+                            <td>{{messenger.identification}}</td>
+                            <td>{{messenger.phone}}</td>
+                            <td>{{messenger.address}}</td>
+                            <td>{{messenger.email}}</td>
+                            <td>{{messenger.type_vehicle}}</td>
+                            <td>{{messenger.brand}}</td>
+                            <td>{{messenger.license_plate}}</td>
+                            <td>
+                                <button class="btn btn-info">Historico</button>
+                                <button class="btn btn-danger">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="container p-5" *ngIf="action==='register'">
+            <div class="row mt-2">
+                <h3>Registro de mensajero</h3>
+                <div class="col-6 text-start">
+                    <p class="btn btn-secondary mt-1" (click)="action='list'"><span><i class="fa-solid fa-arrow-left"></i></span></p>
+                </div>
+            </div>
+            <div class="row justify-content-around allscreen">
+
+                <div class="col-lg-5 col-md-5 col-sm-10 text-center">
+                    <img *ngIf="step===1" src="../../../assets/img/person.svg" alt="" width="60%">
+                    <img *ngIf="step===2" src="../../../assets/img/messenger.svg" alt="" width="60%">
+                    <h2></h2>
+                </div>
+
+                <div *ngIf="step===1" class="col-lg-6 col-md-6 col-sm-12 shadow text-center border-radio pt-3">
+                    <div class="row mt-2">
+                        <h5>Información general</h5>
+                    </div>
+                    <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Digite una identificacion">
+                    <input type="text" [(ngModel)]="phone" class="form-control shadow mt-3" maxLength="11" placeholder="Digite un telefono">
+                    <textarea [(ngModel)]="address" class="form-control shadow mt-3" rows="3" placeholder="Digite una direccion"></textarea>
+                    <input type="email" [(ngModel)]="email" class="form-control shadow mt-3" maxLength="11" placeholder="Digite un correo">
+                    <input (change)="getFile($event)" type="file" class="form-control shadow mt-3">
+                    <button (click)="step=2" [disabled]="phone==='' || identification==='' || address===''" class="btn btn-secondary btn-block btn-lg mt-3 mb-3 text-white shadow" (click)="save()">
+                        Siguiente
+                    </button>
+                </div>
+
+                <div *ngIf="step===2" class="col-lg-6 col-md-6 col-sm-12 shadow text-center border-radio pt-3">
+                    <div class="alert alert-success" role="alert" *ngIf="result === 'ok'">
+                        Registro completado.
+                    </div>
+                    <div class="alert alert-danger" role="alert" *ngIf="result === 'fail'">
+                        No se pudo completar su registro.
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mt-2">
+                        <div class="col-6 text-start">
+                            <p class="btn btn-secondary mt-1" (click)="step=1"><span><i class="fa-solid fa-arrow-left"></i></span></p>
+                        </div>
+                        <h5>Información de vehiculo</h5>
+                    </div>
+
+                    <select class="form-control shadow mt-3" [(ngModel)]="type_vehicle" id="type_vehicle">
+                        <option value="motor">Motor</option>
+                        <option value="pasola">Pasola</option>
+                        <option value="bicicleta">Bicicleta</option>
+                    </select>
+                    <input type="text" [(ngModel)]="brand" class="form-control shadow mt-3" maxLength="20" placeholder="Digite un modelo">
+                    <input type="text" [(ngModel)]="license_plate" class="form-control shadow mt-3" maxLength="20" placeholder="Digite una placa">
+                    <input type="color" [(ngModel)]="color" class="form-control shadow mt-3" maxLength="20" placeholder="Digite una placa">
+                    <button *ngIf="!loading" [disabled]="brand==='' || license_plate===''" class="btn btn-success btn-block btn-lg mt-3 mb-3 shadow" (click)="save()">
+                        Registrar
+                    </button>
+                    <button *ngIf="loading" class="btn btn-success btn-block btn-lg mt-3 mb-3 text-white shadow" (click)="save()">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Registrando...
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 </div>
+
 
 <div class="d-flex justify-content-center align-items-center text-center d-sm-block d-lg-none d-md-none" style="height:100vh;">
     <div>

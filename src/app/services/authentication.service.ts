@@ -15,7 +15,7 @@ export class AuthenticationService {
     const url = this.url;
 
     const credentials = {
-      "cedula":identification,
+      "identification":identification,
       "password":password
     };
 

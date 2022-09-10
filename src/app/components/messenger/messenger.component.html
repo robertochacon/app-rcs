@@ -41,7 +41,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let messenger of listMessengers; let i = index;">
+                        <tr *ngFor="let messenger of listMessengers; let i = index;" class="text-start">
                             <td>{{i}}</td>
                             <td>{{messenger.identification}}</td>
                             <td>{{messenger.phone}}</td>
@@ -51,7 +51,7 @@
                             <td>{{messenger.brand}}</td>
                             <td>{{messenger.license_plate}}</td>
                             <td>
-                                <button class="btn btn-info">Historico</button>
+                                <button class="btn btn-secondary mr-1">Historico</button>
                                 <button class="btn btn-danger">Eliminar</button>
                             </td>
                         </tr>
@@ -80,6 +80,7 @@
                     <div class="row mt-2">
                         <h5>Información general</h5>
                     </div>
+                    <input type="text" [(ngModel)]="name" class="form-control shadow mt-3" maxLength="50" placeholder="Digite una nombre">
                     <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Digite una identificacion">
                     <input type="text" [(ngModel)]="phone" class="form-control shadow mt-3" maxLength="11" placeholder="Digite un telefono">
                     <textarea [(ngModel)]="address" class="form-control shadow mt-3" rows="3" placeholder="Digite una direccion"></textarea>

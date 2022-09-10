@@ -15,6 +15,7 @@ export class MessengerComponent implements OnInit {
   loading = false;
   loadData = false;
   result = '';
+  name = '';
   identification = '';
   phone = '';
   email = '';
@@ -56,6 +57,7 @@ export class MessengerComponent implements OnInit {
   }
 
   reset(){
+    this.name = '';
     this.identification = '';
     this.phone = '';
     this.address = '';
@@ -71,6 +73,7 @@ export class MessengerComponent implements OnInit {
 
     this.loading = true;
     let datos = new FormData();
+    datos.append("name",this.name);
     datos.append("identification",this.identification);
     datos.append("phone",this.phone);
     datos.append("email",this.email);

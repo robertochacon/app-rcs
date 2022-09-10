@@ -13,6 +13,7 @@ export class ConsultingComponent implements OnInit {
   step = 1;
   session = false;
   result = '';
+  location = false;
 
   constructor(private _documents: DocumentsService) { }
 
@@ -56,6 +57,18 @@ export class ConsultingComponent implements OnInit {
 
   back(){
     this.step = 1;
+  }
+
+  getLocation(): void{
+    if (navigator.geolocation) { //check if geolocation is available
+      navigator.geolocation.getCurrentPosition((position)=>{
+        console.log(position);
+        this.location = true;
+      });   
+    }else{
+      console.log('No disponible')
+      this.location = false;
+    }
   }
 
 }

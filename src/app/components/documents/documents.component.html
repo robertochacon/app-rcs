@@ -37,12 +37,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let document of listDocuments">
+                        <tr *ngFor="let document of listDocuments" class="text-start">
                             <td>{{document.identification}}</td>
                             <td>{{document.name}}</td>
                             <td>{{document.description}}</td>
                             <td>
-                                <button class="btn btn-info text-white">Visualizar</button>
+                                <button class="btn btn-secondary">Visualizar</button>
                             </td>
                             <td>
                                 <button class="btn btn-danger">Eliminar</button>

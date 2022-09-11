@@ -1,9 +1,11 @@
 <div class="container">
+
     <div class="row mt-2" *ngIf="!session">
         <div class="col-6 text-start">
             <p routerLink="/home" class="btn btn-secondary mt-1"><span><i class="fa-solid fa-house"></i></span></p>
         </div>
     </div>
+
     <div class="row justify-content-center allscreen pt-3" *ngIf="step===1">
 
         <div class="row justify-content-center">
@@ -63,8 +65,8 @@
                                 <p><b>Fecha:</b><br>{{ getDate(document.created_at) }}</p>
                                 <a href="https://api-rcs-lqtwb.ondigitalocean.app/{{getFile(document.file)}}" style="width:100%;" target="_blank" class="btn btn-success text-white btn-lg m-1"><i class="fa-solid fa-eye"></i> Ver</a>
                                 <a style="width:100%;" target="_blank" class="btn btn-info text-white btn-lg m-1"><i class="fa-solid fa-envelope"></i> Correo</a>
-                                <a style="width:100%;" target="_blank" class="btn btn-danger text-white btn-lg m-1"><i class="fa-solid fa-location-dot" (click)="getLocation()"></i> Localizame</a>
-                                <a style="width:100%;" target="_blank" class="btn btn-warning text-white btn-lg m-1"><i class="fa-solid fa-download"></i> Descargar</a>
+                                <a style="width:100%;" target="_blank" class="btn btn-danger text-white btn-lg m-1" (click)="getLocation()"><i class="fa-solid fa-location-dot"></i> Localizame</a>
+                                <a href="https://api-rcs-lqtwb.ondigitalocean.app/{{getFile(document.file)}}" style="width:100%;" class="btn btn-warning text-white btn-lg m-1" download><i class="fa-solid fa-download"></i> Descargar</a>
                             </div>
                         </div>
                     </div>
@@ -73,4 +75,17 @@
         </div>
     </div>
 
+</div>
+
+<div *ngIf="status!==''" class="row justify-content-center align-items-center ventana-total">
+    <div class="col-12 text-center">
+        <div *ngIf="status!=='enviado'" class="spinner-border" style="width: 8rem; height: 8rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <img *ngIf="status==='enviado'" src="../../../assets/img/ok.svg" width="70%" alt="">
+        <h2 *ngIf="status==='location'" class="text-white">Obteniendo ubicacion</h2>
+        <h2 *ngIf="status==='enviando'" class="text-white">Enviando solicitud</h2>
+        <h2 *ngIf="status==='enviado'" class="text-white">Solicitud enviada</h2>
+        <h2 *ngIf="status==='fail'" class="text-white">No se pudo obtener su ubicacion</h2>
+    </div>
 </div>

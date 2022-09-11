@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class AuthenticationService {
 
-  url = 'https://api-rcs-lqtwb.ondigitalocean.app/api/login';
+  // url = 'https://api-rcs-lqtwb.ondigitalocean.app/api/login';
+  url = 'http://127.0.0.1:8000/api/login';
 
   constructor(private http: HttpClient) { }
 

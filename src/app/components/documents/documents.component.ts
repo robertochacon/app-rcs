@@ -80,4 +80,5 @@ export class DocumentsComponent implements OnInit {
     }, 5000);
 
   }
+  
 }

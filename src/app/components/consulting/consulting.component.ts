@@ -59,16 +59,4 @@ export class ConsultingComponent implements OnInit {
     this.step = 1;
   }
 
-  getLocation(): void{
-    if (navigator.geolocation) { //check if geolocation is available
-      navigator.geolocation.getCurrentPosition((position)=>{
-        console.log(position);
-        this.location = true;
-      });   
-    }else{
-      console.log('No disponible')
-      this.location = false;
-    }
-  }
-
 }

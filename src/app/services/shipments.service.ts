@@ -5,24 +5,24 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class MessengersService {
+export class ShipmentsService {
 
   // url = 'https://api-rcs-lqtwb.ondigitalocean.app/api/deliverys';
-  url = 'http://127.0.0.1:8000/api/deliverys';
+  url = 'http://127.0.0.1:8000/api/shipments';
 
   constructor(private http: HttpClient) { }
 
-  getAllMessengers(): Observable<any>{
+  getAllShipments(): Observable<any>{
     const url = this.url;
     return this.http.get(url);
   }
 
-  getMessengers(identification: string): Observable<any>{
+  getShipments(identification: string): Observable<any>{
     const url = this.url+'/'+identification;
     return this.http.get(url);
   }
 
-  setMessengers(json: any): Observable<any>{
+  setShipments(json: any): Observable<any>{
     const url = this.url;
     return this.http.post(url, json);
   }

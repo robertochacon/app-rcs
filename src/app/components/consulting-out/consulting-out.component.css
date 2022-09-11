@@ -50,3 +50,14 @@ input[type=text]:focus {
 .btns:active {
     font-size: 30px;
 }
+
+.ventana-total {
+    margin: 0px;
+    top: 0px;
+    z-index: 1;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+}

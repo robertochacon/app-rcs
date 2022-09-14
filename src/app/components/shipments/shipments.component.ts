@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ShipmentsService } from 'src/app/services/shipments.service';
+
 declare const $: any;
 
 @Component({
@@ -14,6 +15,8 @@ export class ShipmentsComponent implements OnInit {
   loadData = false;
   result = '';
   listShipments: any[] = [];
+  latitud:any;
+  longitud:any;
 
   constructor(private _shipments: ShipmentsService) { 
   }
@@ -39,6 +42,13 @@ export class ShipmentsComponent implements OnInit {
         this.loading = false;
     })
 
+  }
+
+  selectShipments(latitud: any, longitud: any): void {
+    this.latitud = latitud;
+    this.longitud = longitud;
+    console.log('logitud: ', this.longitud, ' latitud: ', this.latitud);
+    
   }
 
 }

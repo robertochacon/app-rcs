@@ -16,6 +16,7 @@ import { SubmenuComponent } from './components/submenu/submenu.component';
 import { ConsultingOutComponent } from './components/consulting-out/consulting-out.component';
 import { MessengerComponent } from './components/messenger/messenger.component';
 import { ShipmentsComponent } from './components/shipments/shipments.component';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ShipmentsComponent } from './components/shipments/shipments.component';
     SubmenuComponent,
     ConsultingOutComponent,
     MessengerComponent,
-    ShipmentsComponent
+    ShipmentsComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,

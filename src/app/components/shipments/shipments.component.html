@@ -3,7 +3,7 @@
 <div class="row without-borders d-none d-lg-flex d-md-flex">
 
     <div class="col-lg-2 col-md-3 col-sm-12 text-center without-borders" style="background:#96bc96;">
-        <app-submenu [page]="'dashboard'"></app-submenu>
+        <app-submenu [page]="'shipments'"></app-submenu>
     </div>
 
     <div class="col-lg-10 col-md-9 col-sm-12">
@@ -11,8 +11,10 @@
             <h3>Shipments</h3>
             <div class="">
                 <div class="row justify-content-center">
-                    <div class="col-lg-8 col-md-8 col-sm-12 d-flex align-items-center justify-content-center">
-                        <img src="../../../assets/img/map2.svg" width="60%" alt="">
+                    <div class="col-lg-8 col-md-8 col-sm-12 text-center">
+                        <!-- <img src="../../../assets/img/map2.svg" width="60%" alt=""> -->
+                        <app-map [latitud]="latitud" [longitud]="longitud" #map></app-map>
+
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 text-center">
 
@@ -27,7 +29,7 @@
                             <table class="table table-hover responsive" id="listShipments" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Identificacion</th>
+                                        <th>Mensaero</th>
                                         <th>Accion</th>
                                     </tr>
                                 </thead>
@@ -35,8 +37,8 @@
                                     <tr *ngFor="let shipment of listShipments" class="text-start">
                                         <td>{{shipment.identification}}</td>
                                         <td>
-                                            <button class="btn btn-secondary"><i class="fa-solid fa-hand-pointer"></i></button>
-                                            <button class="btn btn-secondary"><i class="fa-solid fa-eye"></i></button>
+                                            <button class="btn btn-secondary" [disabled]="!shipment.latitudInput && !shipment.longitudInput" (click)="selectShipments(shipment.latitudInput, shipment.longitudInput);map.selectedShipment();"><i class="fa-solid fa-hand-pointer"></i></button>
+                                            <!-- <button class="btn btn-secondary"><i class="fa-solid fa-eye"></i></button> -->
                                             <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
                                         </td>
                                     </tr>
@@ -59,3 +61,34 @@
         <a routerLink="/" class="btn btn-success shadow">Pagina principal</a>
     </div>
 </div>
+
+
+<script>
+    var map = L.map('map').setView([51.505, -0.09], 13);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    L.marker([18.4608927, -69.9512021]).addTo(map)
+        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+        .openPopup();
+
+
+
+
+    // // Creating map options
+    // var mapOptions = {
+    //     center: [17.385044, 78.486671],
+    //     zoom: 10
+    // }
+
+    // // Creating a map object
+    // var map = new L.map('map', mapOptions);
+
+    // // Creating a Layer object
+    // var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+
+    // // Adding layer to the map
+    // map.addLayer(layer);
+</script>

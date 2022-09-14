@@ -37,11 +37,11 @@ export class MapComponent implements AfterViewInit {
   }
 
   selectedShipment(): void {
-    L.marker([this.longitud, this.latitud],
+    L.marker([this.latitud, this.longitud],
       {alt: 'Kyiv'}).addTo(this.map) // "Kyiv" is the accessible name of this marker
       .bindPopup('<button class="btn btn-primary"><i class="fa-regular fa-moped"></i> Enviar mensajero</button>');
 
-    this.map.flyTo([this.longitud, this.latitud], 6);
+    this.map.flyTo([this.latitud, this.longitud], 15);
   }
 
 }

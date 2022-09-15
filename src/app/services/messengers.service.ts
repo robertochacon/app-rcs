@@ -27,4 +27,9 @@ export class MessengersService {
     return this.http.post(url, json);
   }
 
+  deleteMessengers(id: number): Observable<any>{
+    const url = this.url+'/delete/'+id;
+    return this.http.post(url, id);
+  }
+
 }

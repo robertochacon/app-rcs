@@ -27,4 +27,9 @@ export class ShipmentsService {
     return this.http.post(url, json);
   }
 
+  deleteShipments(id: number): Observable<any>{
+    const url = this.url+'/delete/'+id;
+    return this.http.post(url, id);
+  }
+
 }

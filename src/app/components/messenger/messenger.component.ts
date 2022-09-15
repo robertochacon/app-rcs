@@ -89,6 +89,7 @@ export class MessengerComponent implements OnInit {
       this.result = 'ok';
       this.reset();
       console.log(response);
+      this.getAllMessengers();
     },error => {
       this.result = 'fail';
       this.loading = false;
@@ -99,4 +100,16 @@ export class MessengerComponent implements OnInit {
     }, 5000);
 
   }
+
+  delete(id: any): void {
+    this._messengers.deleteMessengers(id).subscribe((response)=>{
+      if(confirm('Deseas eliminar este envio?')){
+        console.log(response);
+      this.getAllMessengers();
+      }
+    },error => {
+      this.result = 'fail-delete';
+    })
+  }
+
 }

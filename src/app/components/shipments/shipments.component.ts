@@ -51,4 +51,15 @@ export class ShipmentsComponent implements OnInit {
     
   }
 
+  delete(id: any): void {
+    this._shipments.deleteShipments(id).subscribe((response)=>{
+      if(confirm('Deseas eliminar este envio?')){
+              console.log(response);
+      this.getAllShipments();
+      }
+    },error => {
+      this.result = 'fail-delete';
+    })
+  }
+
 }

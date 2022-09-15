@@ -70,6 +70,7 @@ export class DocumentsComponent implements OnInit {
       this.result = 'ok';
       this.reset();
       console.log(response);
+      this.getAllDocuments();
     },error => {
       this.result = 'fail';
       this.loading = false;
@@ -81,4 +82,15 @@ export class DocumentsComponent implements OnInit {
 
   }
   
+  delete(id: any): void {
+    this._documents.deleteDocuments(id).subscribe((response)=>{
+      if(confirm('Deseas eliminar este documento?')){
+              console.log(response);
+      this.getAllDocuments();
+      }
+    },error => {
+      this.result = 'fail-delete';
+    })
+  }
+
 }

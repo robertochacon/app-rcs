@@ -1,0 +1,31 @@
+.border {
+    border-radius: 10px;
+}
+
+.container {
+    height: 100vh;
+}
+
+.without-borders {
+    margin: 0px;
+    padding: 0px;
+}
+
+.selected {
+    background: white;
+}
+
+.btns {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    text-decoration: none;
+    color: gray;
+}
+
+.btns:hover {
+    color: rgb(58, 58, 58);
+}
+
+.btns:active {
+    font-size: 30px;
+}

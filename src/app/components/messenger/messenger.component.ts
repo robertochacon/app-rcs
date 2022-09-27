@@ -102,14 +102,14 @@ export class MessengerComponent implements OnInit {
   }
 
   delete(id: any): void {
-    this._messengers.deleteMessengers(id).subscribe((response)=>{
-      if(confirm('Deseas eliminar este envio?')){
+    if(confirm('Deseas eliminar este envio?')){
+      this._messengers.deleteMessengers(id).subscribe((response)=>{
         console.log(response);
-      this.getAllMessengers();
-      }
-    },error => {
-      this.result = 'fail-delete';
-    })
+        this.getAllMessengers();
+      },error => {
+        this.result = 'fail-delete';
+      })
+    }
   }
 
 }

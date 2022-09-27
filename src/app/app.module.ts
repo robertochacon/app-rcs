@@ -17,6 +17,8 @@ import { ConsultingOutComponent } from './components/consulting-out/consulting-o
 import { MessengerComponent } from './components/messenger/messenger.component';
 import { ShipmentsComponent } from './components/shipments/shipments.component';
 import { MapComponent } from './components/map/map.component';
+import { EntitiesComponent } from './components/entities/entities.component';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { MapComponent } from './components/map/map.component';
     ConsultingOutComponent,
     MessengerComponent,
     ShipmentsComponent,
-    MapComponent
+    MapComponent,
+    EntitiesComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

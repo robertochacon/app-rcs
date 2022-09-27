@@ -3,7 +3,7 @@
 <div class="row without-borders d-none d-lg-flex d-md-flex">
 
     <div class="col-lg-2 col-md-3 col-sm-12 text-center without-borders" style="background:#96bc96;">
-        <app-submenu [page]="'documents'"></app-submenu>
+        <app-submenu [page]="'entities'"></app-submenu>
     </div>
 
     <div class="col-lg-10 col-md-9 col-sm-12">
@@ -11,10 +11,10 @@
         <div class="container p-5 text-center" *ngIf="action==='list'">
             <div class="mt-2 d-flex justify-content-between align-items-center">
                 <div class="">
-                    <h3>Lista de documentos</h3>
+                    <h3>Lista de entidades</h3>
                 </div>
                 <div class="col-lg-0 text-start">
-                    <p class="btn btn-primary mt-1" (click)="action='register'"><i class="fa-solid fa-plus d-lg-none d-md-none d-sm-block"></i><span class="d-none d-lg-block d-md-block"><i class="fa-solid fa-plus"></i> Registrar documento</span></p>
+                    <p class="btn btn-primary mt-1" (click)="action='register'"><i class="fa-solid fa-plus d-lg-none d-md-none d-sm-block"></i><span class="d-none d-lg-block d-md-block"><i class="fa-solid fa-plus"></i> Registrar entidad</span></p>
                 </div>
             </div>
 
@@ -26,28 +26,26 @@
             </div>
 
             <div *ngIf="!loading" class="bg-light p-3 border shadow table-responsive">
-                <table class="table table-hover responsive" id="listDocuments" style="width:100%">
+                <table class="table table-hover responsive" id="listEntities" style="width:100%">
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Identificacion</th>
                             <th>Nombre</th>
-                            <th>Descripcion</th>
-                            <th>Archivo</th>
+                            <th>Descripccion</th>
+                            <th>Direccion</th>
+                            <th>Telefono</th>
                             <th>Accion</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let document of listDocuments" class="text-start">
-                            <td><i class="fa-solid fa-file mr-2 text-black"></i></td>
-                            <td>{{document.identification}}</td>
-                            <td>{{document.name}}</td>
-                            <td>{{document.description}}</td>
+                        <tr *ngFor="let entity of listEntities" class="text-start">
+                            <td><i class="fa-solid fa-building mr-2 text-black"></i></td>
+                            <td>{{entity.name}}</td>
+                            <td>{{entity.description}}</td>
+                            <td>{{entity.address}}</td>
+                            <td>{{entity.phone}}</td>
                             <td>
-                                <button class="btn btn-secondary">Visualizar</button>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger" (click)="delete(document.id)"><i class="fa-solid fa-trash"></i></button>
+                                <button class="btn btn-danger" (click)="delete(entity.id)"><i class="fa-solid fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -57,7 +55,7 @@
 
         <div class="container p-5" *ngIf="action==='register'">
             <div class="row mt-2">
-                <h3>Registro de resultado</h3>
+                <h3>Registro de entidad</h3>
                 <div class="col-6 text-start">
                     <p class="btn btn-secondary mt-1" (click)="action='list'"><span><i class="fa-solid fa-arrow-left"></i></span></p>
                 </div>
@@ -65,7 +63,7 @@
             <div class="row justify-content-around allscreen">
 
                 <div class="col-lg-5 col-md-5 col-sm-10 text-center">
-                    <img src="../../../assets/img/add_documents.svg" alt="" width="60%">
+                    <img src="../../../assets/img/build.svg" alt="" width="60%">
                     <h2></h2>
                 </div>
 
@@ -77,11 +75,12 @@
                         No se pudo completar su registro.
                     </div>
                     <h5>Información general</h5>
-                    <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Digite una identificacion">
                     <input type="text" [(ngModel)]="name" class="form-control shadow mt-3" maxLength="11" placeholder="Digite un nombre">
                     <textarea [(ngModel)]="description" class="form-control shadow mt-3" rows="3" placeholder="Digite una descripcion"></textarea>
+                    <textarea [(ngModel)]="address" class="form-control shadow mt-3" rows="3" placeholder="Digite una direccion"></textarea>
+                    <input type="text" [(ngModel)]="phone" class="form-control shadow mt-3" maxLength="11" placeholder="Digite un telefono">
                     <input (change)="getFile($event)" type="file" class="form-control shadow mt-3">
-                    <button *ngIf="!loading" [disabled]="name==='' || identification==='' || description===''" class="btn btn-success btn-block btn-lg m-4 shadow" (click)="save()">
+                    <button *ngIf="!loading" [disabled]="name==='' || address==='' || phone===''" class="btn btn-success btn-block btn-lg m-4 shadow" (click)="save()">
                         Registrar
                     </button>
                     <button *ngIf="loading" class="btn btn-success btn-block btn-lg m-4 shadow" (click)="save()">

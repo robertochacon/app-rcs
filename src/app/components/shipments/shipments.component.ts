@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ShipmentsService } from 'src/app/services/shipments.service';
+import { MessengersService } from 'src/app/services/messengers.service';
 
 declare const $: any;
 
@@ -17,12 +18,14 @@ export class ShipmentsComponent implements OnInit {
   listShipments: any[] = [];
   latitud:any;
   longitud:any;
+  listMessengers: any[] = [];
 
-  constructor(private _shipments: ShipmentsService) { 
+  constructor(private _shipments: ShipmentsService, private _messengers: MessengersService) { 
   }
   
   ngOnInit(): void {
     this.getAllShipments();
+    this.getAllMessengers();    
   }
 
   getAllShipments(){
@@ -44,6 +47,15 @@ export class ShipmentsComponent implements OnInit {
 
   }
 
+  getAllMessengers(){
+    this._messengers.getAllMessengers().subscribe((response)=>{
+      this.listMessengers = response.data;
+      console.log(this.listMessengers);
+    }, error=>{
+      // this.listMessengers = [];
+    })
+  }
+
   selectShipments(latitud: any, longitud: any): void {
     this.latitud = latitud;
     this.longitud = longitud;
@@ -52,14 +64,14 @@ export class ShipmentsComponent implements OnInit {
   }
 
   delete(id: any): void {
-    this._shipments.deleteShipments(id).subscribe((response)=>{
-      if(confirm('Deseas eliminar este envio?')){
-              console.log(response);
-      this.getAllShipments();
-      }
-    },error => {
-      this.result = 'fail-delete';
-    })
+    if(confirm('Deseas eliminar este envio?')){
+      this._shipments.deleteShipments(id).subscribe((response)=>{
+        console.log(response);
+        this.getAllShipments();
+      },error => {
+        this.result = 'fail-delete';
+      })
+    }
   }
 
 }

@@ -1,40 +1,40 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { DocumentsService } from 'src/app/services/documents.service';
+import { EntitiesService } from 'src/app/services/entities.service';
 declare const $: any;
 
 @Component({
-  selector: 'app-documents',
-  templateUrl: './documents.component.html',
-  styleUrls: ['./documents.component.css']
+  selector: 'app-entities',
+  templateUrl: './entities.component.html',
+  styleUrls: ['./entities.component.css']
 })
-
-export class DocumentsComponent implements OnInit {
+export class EntitiesComponent implements OnInit {
   action = 'list';
   loading = false;
   loadData = false;
   result = '';
-  identification = '';
   name = '';
   description = '';
+  address = '';
+  phone = '';
   file: any = [];
-  listDocuments: any[] = [];
+  listEntities: any[] = [];
 
-  constructor(private _documents: DocumentsService) { }
+  constructor(private _entities: EntitiesService) { }
 
   ngOnInit(): void {
-    this.getAllDocuments();
+    this.getAllEntities();
   }
 
-  getAllDocuments(){
+  getAllEntities(){
     this.loading = true;
 
-    this._documents.getAllDocuments().subscribe((response)=>{
+    this._entities.getAllEntities().subscribe((response)=>{
 
-      this.listDocuments = response.data;
+      this.listEntities = response.data;
 
       setTimeout(function(){
-        $('#listDocuments').DataTable();
+        $('#listEntities').DataTable();
       },100);
       this.loading = false;
       
@@ -50,9 +50,10 @@ export class DocumentsComponent implements OnInit {
   }
 
   reset(){
-    this.identification = '';
     this.name = '';
     this.description = '';
+    this.address = '';
+    this.phone = '';
     this.file = [];
   }
   
@@ -60,17 +61,18 @@ export class DocumentsComponent implements OnInit {
 
     this.loading = true;
     let datos = new FormData();
-    datos.append("identification",this.identification);
     datos.append("name",this.name);
     datos.append("description",this.description);
+    datos.append("address",this.address);
+    datos.append("phone",this.phone);
     datos.append("file",this.file);
 
-    this._documents.setDocuments(datos).subscribe((response)=>{
+    this._entities.setEntities(datos).subscribe((response)=>{
       this.loading = false;
       this.result = 'ok';
       this.reset();
       console.log(response);
-      this.getAllDocuments();
+      this.getAllEntities();
     },error => {
       this.result = 'fail';
       this.loading = false;
@@ -83,14 +85,15 @@ export class DocumentsComponent implements OnInit {
   }
   
   delete(id: any): void {
-    if(confirm('Deseas eliminar este documento?')){
-      this._documents.deleteDocuments(id).subscribe((response)=>{
+    if(confirm('Deseas eliminar esta entidad?')){
+      this._entities.deleteEntities(id).subscribe((response)=>{
         console.log(response);
-        this.getAllDocuments();
+        this.getAllEntities();
       },error => {
         this.result = 'fail-delete';
       })
     }
   }
+
 
 }

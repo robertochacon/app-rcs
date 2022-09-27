@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class SubmenuComponent implements OnInit {
 
   @Input() page: string;
+  role: any;
 
   constructor(private router: Router) {
     this.page='';
@@ -16,6 +17,7 @@ export class SubmenuComponent implements OnInit {
 
   ngOnInit(): void {
     const session = localStorage.getItem('token');
+    this.role = localStorage.getItem('role');
     if(!session || session === undefined){
       this.router.navigate(['/login']);
     }

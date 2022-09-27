@@ -5,36 +5,32 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ShipmentsService {
+export class EntitiesService {
 
-  // url = 'https://api-rcs-lqtwb.ondigitalocean.app/api/deliverys';
-  url = 'http://127.0.0.1:8000/api/shipments';
+  // url = 'https://api-rcs-lqtwb.ondigitalocean.app/api/entities';
+  url = 'http://127.0.0.1:8000/api/entities';
 
   constructor(private http: HttpClient) { }
 
-  getAllShipments(): Observable<any>{
+  getAllEntities(): Observable<any>{
     const url = this.url;
     return this.http.get(url);
   }
 
-  getShipments(identification: string): Observable<any>{
+  getEntities(identification: string): Observable<any>{
     const url = this.url+'/'+identification;
     return this.http.get(url);
   }
 
-  setShipments(json: any): Observable<any>{
+  setEntities(json: any): Observable<any>{
     const url = this.url;
     return this.http.post(url, json);
   }
 
-  assignToShipments(id: number, delivery: any): Observable<any>{
-    const url = this.url+'/assign_messenger/'+id+'/'+delivery;
-    return this.http.get(url);
-  }
-
-  deleteShipments(id: number): Observable<any>{
+  deleteEntities(id: number): Observable<any>{
     const url = this.url+'/delete/'+id;
     return this.http.post(url, id);
   }
+
 
 }

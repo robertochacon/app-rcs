@@ -9,7 +9,38 @@
     <div class="col-lg-10 col-md-9 col-sm-12">
         <div class="container bg-white p-5">
             <h3>Dashboard</h3>
-            <h3 class="text-secondary">Hola, {{name}}</h3>
+            <div class="alert alert-success" role="alert">
+                <h3 class="text-secondary">Hola, {{name}}</h3>
+                <h6>Aqui podras ver todos los avances que tienes por el momento.</h6>
+            </div>
+
+            <div class="row">
+                <div class="col-3 text-center p-2">
+                    <div class="alert alert-secondary" role="alert">
+                        <h2 class="text-secondary">{{ documents }}</h2>
+                        <h4 class="text-secondary">Documentos</h4>
+                    </div>
+                </div>
+                <div class="col-3 text-center p-2">
+                    <div class="alert alert-secondary" role="alert">
+                        <h2 class="text-secondary">{{ shipments }}</h2>
+                        <h4 class="text-secondary">Envios</h4>
+                    </div>
+                </div>
+                <div class="col-3 text-center p-2">
+                    <div class="alert alert-secondary" role="alert">
+                        <h2 class="text-secondary">{{ deliverys }}</h2>
+                        <h4 class="text-secondary">Mensajeros</h4>
+                    </div>
+                </div>
+                <div class="col-3 text-center p-2">
+                    <div class="alert alert-secondary" role="alert">
+                        <h2 class="text-secondary">{{ users }}</h2>
+                        <h4 class="text-secondary">Usuarios</h4>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 

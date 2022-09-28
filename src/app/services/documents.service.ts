@@ -17,6 +17,11 @@ export class DocumentsService {
     return this.http.get(url);
   }
 
+  getAllDocumentsByEntity(entidad: any): Observable<any>{
+    const url = this.url+'/entity/'+entidad;
+    return this.http.get(url);
+  }
+
   getDocuments(identification: string): Observable<any>{
     const url = this.url+'/'+identification;
     return this.http.get(url);

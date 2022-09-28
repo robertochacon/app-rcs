@@ -31,7 +31,17 @@ export class ShipmentsComponent implements OnInit {
   getAllShipments(){
     this.loading = true;
 
-    this._shipments.getAllShipments().subscribe((response)=>{
+    let role = localStorage.getItem('role');
+    let method;
+    let entity = localStorage.getItem('entity_id');
+
+    if(role==="super_admin"){
+      method = this._shipments.getAllShipments();
+    }else{
+      method = this._shipments.getAllShipmentsByEntity(entity);
+    }
+
+    method.subscribe((response)=>{
 
       this.listShipments = response.data;
 

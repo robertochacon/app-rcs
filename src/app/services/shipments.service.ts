@@ -17,6 +17,11 @@ export class ShipmentsService {
     return this.http.get(url);
   }
 
+  getAllShipmentsByEntity(entity: any): Observable<any>{
+    const url = this.url+'/entity/'+entity;
+    return this.http.get(url);
+  }
+
   getShipments(identification: string): Observable<any>{
     const url = this.url+'/'+identification;
     return this.http.get(url);

@@ -27,9 +27,12 @@ export class LoginComponent implements OnInit {
 
     this._authentication.login(this.identification,this.password).subscribe((response)=>{
 
+        localStorage.setItem("user_id", response.user.id);
         localStorage.setItem("name", response.user.name);
         localStorage.setItem("user", JSON.stringify(response.user));
+        localStorage.setItem("entity", JSON.stringify(response.user));
         localStorage.setItem("role", response.user.role);
+        localStorage.setItem("entity_id", response.user.entity_id);
         localStorage.setItem("token", response.token);
       
         setTimeout(() => {

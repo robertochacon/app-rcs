@@ -58,7 +58,7 @@ export class ConsultingOutComponent implements OnInit {
     this.step = 1;
   }
 
-  getLocation(): void{
+  getLocation(entity_id: any): void{
     this.status = 'location'
     
     if (navigator.geolocation) { //check if geolocation is available
@@ -69,7 +69,7 @@ export class ConsultingOutComponent implements OnInit {
 
             this.latitudInput = position.coords.latitude;
             this.longitudInput = position.coords.longitude;
-            this.save();
+            this.save(entity_id);
         }else{
           this.status = 'fail'
           this.status = ''
@@ -83,12 +83,13 @@ export class ConsultingOutComponent implements OnInit {
 
   }
 
-  save(): void {
+  save(entity_id: any): void {
 
     this.status = 'enviando';
 
     this.loading = true;
     let datos = new FormData();
+    datos.append("entity_id",entity_id);
     datos.append("identification",this.identification);
     datos.append("latitudInput",this.latitudInput);
     datos.append("longitudInput",this.longitudInput);

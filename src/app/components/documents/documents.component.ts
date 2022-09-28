@@ -29,7 +29,17 @@ export class DocumentsComponent implements OnInit {
   getAllDocuments(){
     this.loading = true;
 
-    this._documents.getAllDocuments().subscribe((response)=>{
+    let role = localStorage.getItem('role');
+    let method;
+    let entity = localStorage.getItem('entity_id');
+
+    if(role==="super_admin"){
+      method = this._documents.getAllDocuments();
+    }else{
+      method = this._documents.getAllDocumentsByEntity(entity);
+    }
+
+    method.subscribe((response)=>{
 
       this.listDocuments = response.data;
 
@@ -60,6 +70,8 @@ export class DocumentsComponent implements OnInit {
 
     this.loading = true;
     let datos = new FormData();
+    datos.append("user_id", `${localStorage.getItem('user_id')}`);
+    datos.append("entity_id", `${localStorage.getItem('entity_id')}`);
     datos.append("identification",this.identification);
     datos.append("name",this.name);
     datos.append("description",this.description);

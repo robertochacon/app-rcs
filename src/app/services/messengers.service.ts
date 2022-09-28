@@ -17,6 +17,11 @@ export class MessengersService {
     return this.http.get(url);
   }
 
+  getAllMessengersByEntity(entity: any): Observable<any>{
+    const url = this.url+'/entity/'+entity;
+    return this.http.get(url);
+  }
+
   getMessengers(identification: string): Observable<any>{
     const url = this.url+'/'+identification;
     return this.http.get(url);

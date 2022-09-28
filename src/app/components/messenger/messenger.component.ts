@@ -36,7 +36,17 @@ export class MessengerComponent implements OnInit {
   getAllMessengers(){
     this.loading = true;
 
-    this._messengers.getAllMessengers().subscribe((response)=>{
+    let role = localStorage.getItem('role');
+    let method;
+    let entity = localStorage.getItem('entity_id');
+
+    if(role==="super_admin"){
+      method = this._messengers.getAllMessengers();
+    }else{
+      method = this._messengers.getAllMessengersByEntity(entity);
+    }
+
+    method.subscribe((response)=>{
 
       this.listMessengers = response.data;
 
@@ -73,6 +83,8 @@ export class MessengerComponent implements OnInit {
 
     this.loading = true;
     let datos = new FormData();
+    datos.append("user_id", `${localStorage.getItem('user_id')}`);
+    datos.append("entity_id", `${localStorage.getItem('entity_id')}`);
     datos.append("name",this.name);
     datos.append("identification",this.identification);
     datos.append("phone",this.phone);

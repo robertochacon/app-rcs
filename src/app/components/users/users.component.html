@@ -33,6 +33,7 @@
                             <th>Nombre</th>
                             <th>Identificacion</th>
                             <th>Role</th>
+                            <th>Entidad</th>
                             <th>Accion</th>
                         </tr>
                     </thead>
@@ -42,6 +43,7 @@
                             <td>{{user.name}}</td>
                             <td>{{user.identification}}</td>
                             <td>{{user.role}}</td>
+                            <td>{{user.entity.name}}</td>
                             <td>
                                 <button class="btn btn-danger" (click)="delete(user.id)"><i class="fa-solid fa-trash"></i></button>
                             </td>
@@ -65,7 +67,7 @@
                     <h2></h2>
                 </div>
 
-                <div *ngIf="step === 1" class="col-lg-6 col-md-6 col-sm-12 shadow text-center border-radio pt-3">
+                <div class="col-lg-6 col-md-6 col-sm-12 shadow text-center border-radio pt-3">
                     <div class="alert alert-success" role="alert" *ngIf="result === 'ok'">
                         Registro completado.
                     </div>
@@ -73,6 +75,10 @@
                         No se pudo completar su registro.
                     </div>
                     <h5>Información general</h5>
+                    <select class="form-control shadow mt-3" [(ngModel)]="entity">
+                        <option value="seleccionar">Seleccionar entidad</option>
+                        <option *ngFor="let entitys of listEntities" value={{entitys.id}}>{{ entitys.name }}</option>
+                    </select>
                     <input type="text" [(ngModel)]="name" class="form-control shadow mt-3" maxLength="11" placeholder="Digite un nombre">
                     <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Digite una identificacion">
                     <select class="form-control shadow mt-3" [(ngModel)]="role">
@@ -81,31 +87,11 @@
                         <option value="super_admin">Super administrador</option>
                     </select>
                     <button *ngIf="!loading" [disabled]="name==='' || identification===''" class="btn btn-success btn-block btn-lg mt-3 mb-3 shadow" (click)="save()">
-                        Registrar usuario
+                        Registrar
                     </button>
                     <button *ngIf="loading" class="btn btn-success btn-block btn-lg mt-3 mb-3 shadow" (click)="save()">
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         Registrando...
-                    </button>
-                </div>
-
-                <div *ngIf="step === 2" class="col-lg-6 col-md-6 col-sm-12 shadow text-center border-radio pt-3">
-                    <div class="alert alert-success" role="alert" *ngIf="result === 'ok'">
-                        Asignacion completa.
-                    </div>
-                    <div class="alert alert-danger" role="alert" *ngIf="result === 'fail'">
-                        No se pudo asignar este usuario.
-                    </div>
-                    <h5>Selecione una entidad</h5>
-                    <select class="form-control shadow mt-3" [(ngModel)]="entity">
-                        <option *ngFor="let entitys of listEntities" value={{entitys.id}}>{{ entitys.name }}</option>
-                    </select>
-                    <button *ngIf="!loading" [disabled]="entity==='seleccionar'" class="btn btn-success btn-block btn-lg mt-3 mb-3 shadow" (click)="save()">
-                        Asignar a empresa
-                    </button>
-                    <button *ngIf="loading" class="btn btn-success btn-block btn-lg mt-3 mb-3 shadow" (click)="save()">
-                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                        Asignando...
                     </button>
                 </div>
 

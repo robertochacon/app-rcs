@@ -16,4 +16,9 @@ export class HomeService {
     return this.http.get(url);
   }
 
+  getAllInfoByEntity(entidad: any): Observable<any>{
+    const url = this.url+'/entity/'+entidad;
+    return this.http.get(url);
+  }
+
 }

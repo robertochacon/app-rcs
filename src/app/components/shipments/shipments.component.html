@@ -12,8 +12,17 @@
             <div class="">
                 <div class="row justify-content-center">
                     <div class="col-lg-6 col-md-6 col-sm-12 text-center">
-                        <!-- <img src="../../../assets/img/map2.svg" width="60%" alt=""> -->
+
                         <app-map [latitud]="latitud" [longitud]="longitud" [listMessengers]="listMessengers" #map></app-map>
+
+                        <div *ngIf="step===1" class="alert alert-dark mt-2 mb-2" role="alert">
+                            <h4>Documento a enviar {{ document }}</h4>
+                            <select class="form-control shadow mt-3" [(ngModel)]="messenger">
+                                <option value="seleccionar">Seleccionar mensajero</option>
+                                <option *ngFor="let m of listMessengers" value={{m.identification}}>{{ m.identification }}</option>
+                            </select>
+                            <button [disabled]="messenger==='seleccionar'" class="btn btn-secondary mt-2"><i class="fa-sharp fa-solid fa-paper-plane"></i> Enviar</button>
+                        </div>
 
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 text-center">
@@ -30,7 +39,8 @@
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th>No. documento</th>
+                                        <th>Documento</th>
+                                        <th>Estado</th>
                                         <th>Accion</th>
                                     </tr>
                                 </thead>
@@ -38,9 +48,10 @@
                                     <tr *ngFor="let shipment of listShipments" class="text-start">
                                         <td><i class="fa-solid fa-location-dot mr-2 text-black"></i></td>
                                         <td>{{shipment.identification}}</td>
+                                        <td>{{shipment.status}}</td>
                                         <td>
                                             <button class="btn btn-info mr-1" [disabled]="!shipment.latitudInput && !shipment.longitudInput" (click)="selectShipments(shipment.latitudInput, shipment.longitudInput);map.selectedShipment();"><i class="fa-solid fa-location-dot"></i></button>
-                                            <button class="btn btn-secondary mr-1"><i class="fa-solid fa-hand-pointer"></i></button>
+                                            <button class="btn btn-secondary mr-1" (click)="assignMessenger(shipment.id, shipment.identification);"><i class="fa-solid fa-hand-pointer"></i></button>
                                             <button class="btn btn-danger" (click)="delete(shipment.id)"><i class="fa-solid fa-trash"></i></button>
                                         </td>
                                     </tr>
@@ -63,34 +74,3 @@
         <a routerLink="/" class="btn btn-success shadow">Pagina principal</a>
     </div>
 </div>
-
-
-<script>
-    var map = L.map('map').setView([51.505, -0.09], 13);
-
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    L.marker([18.4608927, -69.9512021]).addTo(map)
-        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-        .openPopup();
-
-
-
-
-    // // Creating map options
-    // var mapOptions = {
-    //     center: [17.385044, 78.486671],
-    //     zoom: 10
-    // }
-
-    // // Creating a map object
-    // var map = new L.map('map', mapOptions);
-
-    // // Creating a Layer object
-    // var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-
-    // // Adding layer to the map
-    // map.addLayer(layer);
-</script>

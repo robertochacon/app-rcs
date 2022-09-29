@@ -19,6 +19,9 @@ export class ShipmentsComponent implements OnInit {
   latitud:any;
   longitud:any;
   listMessengers: any[] = [];
+  step = 0;
+  messenger = 'seleccionar';
+  document = '';
 
   constructor(private _shipments: ShipmentsService, private _messengers: MessengersService) { 
   }
@@ -26,6 +29,34 @@ export class ShipmentsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllShipments();
     this.getAllMessengers();    
+  }
+
+  assignMessenger(id: any, document: any): void{
+    this.getAllMessengers();
+    this.step = 1;
+    this.document = document;
+  }
+
+  sendToMessenger(): void {
+
+    // this.loading = true;
+    // let datos = new FormData();
+    // datos.append("identification",this.identification);
+    // datos.append("role",this.role);
+    // // datos.append("file",this.file);
+
+    // this._users.setUsers(datos).subscribe((response)=>{
+    //   this.loading = false;
+    //   this.result = 'ok';
+    //   this.reset();
+    //   console.log(response);
+    //   this.getAllUsers();
+    // },error => {
+    //   this.result = 'fail';
+    //   this.loading = false;
+    // })
+
+
   }
 
   getAllShipments(){
@@ -62,15 +93,13 @@ export class ShipmentsComponent implements OnInit {
       this.listMessengers = response.data;
       console.log(this.listMessengers);
     }, error=>{
-      // this.listMessengers = [];
+      this.listMessengers = [];
     })
   }
 
   selectShipments(latitud: any, longitud: any): void {
     this.latitud = latitud;
-    this.longitud = longitud;
-    console.log('logitud: ', this.longitud, ' latitud: ', this.latitud);
-    
+    this.longitud = longitud;    
   }
 
   delete(id: any): void {

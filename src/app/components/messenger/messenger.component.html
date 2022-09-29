@@ -37,6 +37,7 @@
                             <th>Vehiculo</th>
                             <th>Modelo</th>
                             <th>Placa</th>
+                            <th>Fecha</th>
                             <th>Accion</th>
                         </tr>
                     </thead>
@@ -50,6 +51,7 @@
                             <td>{{messenger.type_vehicle}}</td>
                             <td>{{messenger.brand}}</td>
                             <td>{{messenger.license_plate}}</td>
+                            <td>{{messenger.created_at | date:'dd/MM/yyyy'}}</td>
                             <td>
                                 <!-- <button class="btn btn-secondary mr-1">Historico</button> -->
                                 <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>

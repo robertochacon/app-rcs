@@ -34,6 +34,7 @@
                             <th>Descripccion</th>
                             <th>Direccion</th>
                             <th>Telefono</th>
+                            <th>Fecha</th>
                             <th>Accion</th>
                         </tr>
                     </thead>
@@ -44,6 +45,7 @@
                             <td>{{entity.description}}</td>
                             <td>{{entity.address}}</td>
                             <td>{{entity.phone}}</td>
+                            <td>{{entity.created_at | date:'dd/MM/yyyy'}}</td>
                             <td>
                                 <button class="btn btn-danger" (click)="delete(entity.id)"><i class="fa-solid fa-trash"></i></button>
                             </td>

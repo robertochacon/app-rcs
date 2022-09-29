@@ -34,6 +34,7 @@
                             <th>Identificacion</th>
                             <th>Role</th>
                             <th>Entidad</th>
+                            <th>Fecha</th>
                             <th>Accion</th>
                         </tr>
                     </thead>
@@ -44,6 +45,7 @@
                             <td>{{user.identification}}</td>
                             <td>{{user.role}}</td>
                             <td>{{user.entity.name}}</td>
+                            <td>{{user.created_at | date:'dd/MM/yyyy'}}</td>
                             <td>
                                 <button class="btn btn-danger" (click)="delete(user.id)"><i class="fa-solid fa-trash"></i></button>
                             </td>

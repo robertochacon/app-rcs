@@ -24,8 +24,10 @@ export class SubmenuComponent implements OnInit {
   }
 
   salir(){
-    localStorage.clear();
-    this.router.navigate(['/login']);
+    if(confirm('Seguro que deseas salir?')){
+      localStorage.clear();
+      this.router.navigate(['/login']);
+    }
   }
 
 }

@@ -26,7 +26,17 @@ export class DashboardComponent implements OnInit {
   getAllInfo(){
     this.loading = true;
 
-    this._home.getAllInfo().subscribe((response)=>{
+    let role = localStorage.getItem('role');
+    let method;
+    let entity = localStorage.getItem('entity_id');
+
+    if(role==="super_admin"){
+      method = this._home.getAllInfo();
+    }else{
+      method = this._home.getAllInfoByEntity(entity);
+    }
+
+    method.subscribe((response)=>{
 
       this.users = response.data.users;
       this.documents = response.data.documents;

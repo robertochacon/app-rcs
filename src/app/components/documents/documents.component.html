@@ -33,6 +33,7 @@
                             <th>Identificacion</th>
                             <th>Nombre</th>
                             <th>Descripcion</th>
+                            <th>Fecha</th>
                             <th>Archivo</th>
                             <th>Accion</th>
                         </tr>
@@ -43,6 +44,7 @@
                             <td>{{document.identification}}</td>
                             <td>{{document.name}}</td>
                             <td>{{document.description}}</td>
+                            <td>{{document.created_at | date:'dd/MM/yyyy'}}</td>
                             <td>
                                 <button class="btn btn-secondary">Visualizar</button>
                             </td>
@@ -57,7 +59,7 @@
 
         <div class="container p-5" *ngIf="action==='register'">
             <div class="row mt-2">
-                <h3>Registro de resultado</h3>
+                <h3>Registro de documento</h3>
                 <div class="col-6 text-start">
                     <p class="btn btn-secondary mt-1" (click)="action='list'"><span><i class="fa-solid fa-arrow-left"></i></span></p>
                 </div>

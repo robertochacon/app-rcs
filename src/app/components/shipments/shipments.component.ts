@@ -15,11 +15,13 @@ export class ShipmentsComponent implements OnInit {
   loading = false;
   loadData = false;
   result = '';
+  accion = '';
   listShipments: any[] = [];
   latitud:any;
   longitud:any;
   listMessengers: any[] = [];
   step = 0;
+  id:any;
   messenger = 'seleccionar';
   document = '';
 
@@ -34,27 +36,24 @@ export class ShipmentsComponent implements OnInit {
   assignMessenger(id: any, document: any): void{
     this.getAllMessengers();
     this.step = 1;
+    this.id = id;
     this.document = document;
   }
 
   sendToMessenger(): void {
 
-    // this.loading = true;
-    // let datos = new FormData();
-    // datos.append("identification",this.identification);
-    // datos.append("role",this.role);
-    // // datos.append("file",this.file);
+    this.accion = 'proccess';
 
-    // this._users.setUsers(datos).subscribe((response)=>{
-    //   this.loading = false;
-    //   this.result = 'ok';
-    //   this.reset();
-    //   console.log(response);
-    //   this.getAllUsers();
-    // },error => {
-    //   this.result = 'fail';
-    //   this.loading = false;
-    // })
+    this._shipments.assignToShipments(this.id,this.messenger).subscribe((response)=>{
+      setTimeout(()=>{
+        this.accion = 'ok';
+        setTimeout(()=>{
+          this.accion = '';
+        },3000)
+      },2000)
+    },error => {
+      this.accion = 'fail';
+    })
 
 
   }

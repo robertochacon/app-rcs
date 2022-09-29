@@ -32,8 +32,8 @@ export class ShipmentsService {
     return this.http.post(url, json);
   }
 
-  assignToShipments(id: number, delivery: any): Observable<any>{
-    const url = this.url+'/assign_messenger/'+id+'/'+delivery;
+  assignToShipments(id: number, messenger: any): Observable<any>{
+    const url = this.url+'/assign_messenger/'+id+'/'+messenger;
     return this.http.get(url);
   }
 

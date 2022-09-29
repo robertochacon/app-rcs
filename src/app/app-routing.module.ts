@@ -10,6 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { MessengerComponent } from './components/messenger/messenger.component';
 import { ShipmentsComponent } from './components/shipments/shipments.component';
+import { MessengersShipmentsComponent } from './components/messengers-shipments/messengers-shipments.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'entities', component: EntitiesComponent},
   {path: 'users', component: UsersComponent},
   {path: 'messengers', component: MessengerComponent},
+  {path: 'messengers-shipments', component: MessengersShipmentsComponent},
   {path: 'shipments', component: ShipmentsComponent},
   {path: 'documents', component: DocumentsComponent},
   {path: 'consulting', component: ConsultingComponent},

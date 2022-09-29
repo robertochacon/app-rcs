@@ -19,6 +19,7 @@ import { ShipmentsComponent } from './components/shipments/shipments.component';
 import { MapComponent } from './components/map/map.component';
 import { EntitiesComponent } from './components/entities/entities.component';
 import { UsersComponent } from './components/users/users.component';
+import { MessengersShipmentsComponent } from './components/messengers-shipments/messengers-shipments.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { UsersComponent } from './components/users/users.component';
     ShipmentsComponent,
     MapComponent,
     EntitiesComponent,
-    UsersComponent
+    UsersComponent,
+    MessengersShipmentsComponent
   ],
   imports: [
     BrowserModule,

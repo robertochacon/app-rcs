@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as L from 'leaflet';
+import { ShipmentsService } from 'src/app/services/shipments.service';
+declare const $: any;
 
 @Component({
   selector: 'app-messengers-shipments',
@@ -9,15 +11,19 @@ import * as L from 'leaflet';
 })
 export class MessengersShipmentsComponent implements OnInit {
 
-
+  step = 1;
   latitud:any;
   longitud:any;
   status: any;
+  envios = 0;
+  listShipments: any[] = [];
+  loading = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private _shipments: ShipmentsService) { }
 
   ngOnInit(): void {
     this.getLocation();
+    this.getAllShipments();
   }
   
   getLocation(): void{
@@ -43,6 +49,36 @@ export class MessengersShipmentsComponent implements OnInit {
       this.status = 'fail'
     }
 
+  }
+
+  getAllShipments(){
+    this.loading = true;
+
+    let role = localStorage.getItem('role');
+    let method;
+    let entity = localStorage.getItem('entity_id');
+
+    method = this._shipments.getAllShipmentsByEntity(entity);
+
+    method.subscribe((response)=>{
+
+      this.listShipments = response.data;
+      this.envios = this.listShipments.length;
+
+      setTimeout(function(){
+        $('#listShipments').DataTable();
+      },100);
+      this.loading = false;
+      
+    }, error=>{
+        this.loading = false;
+    })
+
+  }
+
+  selectShipments(latitud: any, longitud: any): void {
+    this.latitud = latitud;
+    this.longitud = longitud;    
   }
 
   salir(){

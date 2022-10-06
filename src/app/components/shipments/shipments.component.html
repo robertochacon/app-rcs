@@ -63,7 +63,10 @@
                                     <tr *ngFor="let shipment of listShipments" class="text-start">
                                         <td><i class="fa-solid fa-location-dot mr-2 text-black"></i></td>
                                         <td>{{shipment.identification}}</td>
-                                        <td>{{shipment.status}}</td>
+                                        <td *ngIf="shipment.status === 'start'">Iniciado</td>
+                                        <td *ngIf="shipment.status === 'process'">En proceso</td>
+                                        <td *ngIf="shipment.status === 'done'">Terminado</td>
+                                        <td *ngIf="shipment.status === 'cancel'">Cancelado</td>
                                         <td>
                                             <button class="btn btn-info mr-1" [disabled]="!shipment.latitudInput && !shipment.longitudInput" (click)="selectShipments(shipment.latitudInput, shipment.longitudInput);map.selectedShipment();"><i class="fa-solid fa-location-dot"></i></button>
                                             <button class="btn btn-secondary mr-1" (click)="assignMessenger(shipment.id, shipment.identification);"><i class="fa-solid fa-hand-pointer"></i></button>

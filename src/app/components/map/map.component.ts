@@ -13,6 +13,7 @@ export class MapComponent implements AfterViewInit {
   @Input() latitud: any;
   @Input() listMessengers: any;
   @Output() shipmentSelect = new EventEmitter();
+  latlngs: any;
 
   private map: any;
   private template  = '';
@@ -24,7 +25,7 @@ export class MapComponent implements AfterViewInit {
   private initMap(): void {
     this.map = L.map('map', {
       center: [ 18.476595094005752, -69.96001989489487 ],
-      zoom: 4
+      zoom: 8
     });
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -41,17 +42,29 @@ export class MapComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initMap();
+    setTimeout(()=>{
+      // setInterval(()=>{
+        this.myUbication();
+
+      // },3000)
+    },4000);
   }
 
   selectedShipment(): void {
     L.marker([this.latitud, this.longitud],
-      {alt: 'Kyiv'}).addTo(this.map) // "Kyiv" is the accessible name of this marker
-      .bindPopup(`<center>
-      <img src="../../../assets/img/messenger.svg" width="80%">
-      ${this.select_t }
-      </center>`);
+      {alt: 'Kyiv'}).addTo(this.map); // "Kyiv" is the accessible name of this marker
+      // .bindPopup(`<center>
+      // <img src="../../../assets/img/messenger.svg" width="80%">
+      // ${this.select_t }
+      // <button class="btn btn-primary"><i class="fa-regular fa-moped"></i> Enviar mensajero</button>
+      // </center>`);
 
     this.map.flyTo([this.latitud, this.longitud], 15);
+  }
+
+  myUbication(): void {
+    L.marker([this.latitud, this.longitud], {alt: 'Kyiv'}).addTo(this.map); 
+    this.map.flyTo([this.latitud, this.longitud]);
   }
 
 }

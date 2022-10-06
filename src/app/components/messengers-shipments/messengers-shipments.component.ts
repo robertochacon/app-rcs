@@ -18,12 +18,14 @@ export class MessengersShipmentsComponent implements OnInit {
   envios = 0;
   listShipments: any[] = [];
   loading = false;
+  active = false;
 
   constructor(private router: Router, private _shipments: ShipmentsService) { }
 
   ngOnInit(): void {
     this.getLocation();
     this.getAllShipments();
+    // $('#modalEnvios').modal('show'); 
   }
   
   getLocation(): void{
@@ -37,6 +39,8 @@ export class MessengersShipmentsComponent implements OnInit {
             this.latitud = position.coords.latitude;
             this.longitud = position.coords.longitude;
             // this.save();
+            console.log(this.latitud)
+            console.log(this.longitud)
             console.log('Ok')
         }else{
           this.status = 'fail'
@@ -78,7 +82,32 @@ export class MessengersShipmentsComponent implements OnInit {
 
   selectShipments(latitud: any, longitud: any): void {
     this.latitud = latitud;
-    this.longitud = longitud;    
+    this.longitud = longitud;
+    this.active = true;
+  }
+
+  setStatusShipments(id: any, status: any): void {
+
+    localStorage.setItem("shipments", id);
+    this._shipments.setStatusShipments(id, status).subscribe((response)=>{
+      console.log(response);
+    },error => {
+      console.log('error');
+    })
+
+  }
+
+  doneShipment(status: any): void {
+
+    let shipment_id:any = localStorage.getItem("shipments");
+    this._shipments.setStatusShipments(shipment_id, status).subscribe((response)=>{
+      console.log(response);
+      this.active = false;
+      this.getAllShipments()
+    },error => {
+      console.log('error');
+    })
+
   }
 
   salir(){

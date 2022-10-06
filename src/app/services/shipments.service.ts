@@ -37,6 +37,11 @@ export class ShipmentsService {
     return this.http.get(url);
   }
 
+  setStatusShipments(id: number, status: any): Observable<any>{
+    const url = this.url+'/status/'+id+'/'+status;
+    return this.http.get(url);
+  }
+
   deleteShipments(id: number): Observable<any>{
     const url = this.url+'/delete/'+id;
     return this.http.post(url, id);

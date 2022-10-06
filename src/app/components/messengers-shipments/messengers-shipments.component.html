@@ -12,13 +12,24 @@
 </div>
 <!-- </div> -->
 
-<button class="btn btn-secondary text-white shadow envios" (click)="step=1" type="button" data-toggle="modal" data-target="#modalEnvios">
-    Envios pendientes {{ envios }}
-</button>
+<div class="col-12 envios p-2">
 
+    <button *ngIf="active===false" class="btn btn-secondary btn-block shadow pt-3" (click)="step=1" type="button" data-toggle="modal" data-target="#modalEnvios">
+        <b><h4 class="text-white">Envios pendientes {{ envios }}</h4></b>
+    </button>
+
+    <button *ngIf="active===true" class="btn btn-success btn-block shadow pt-3" (click)="doneShipment('done')" type="button" data-toggle="modal" data-target="#modalEnvios">
+        <b><h4 class="text-white">Entregado</h4></b>
+    </button>
+
+    <button *ngIf="active===true" class="btn btn-danger btn-block shadow pt-3" (click)="active=false" type="button" data-toggle="modal" data-target="#modalEnvios">
+        <b><h4 class="text-white">Cancelar</h4></b>
+    </button>
+
+</div>
 
 <!-- Modal -->
-<div class="modal fade" id="modalEnvios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalEnvios" tabindex="-1" role="dialog" aria-labelledby="modalEnvios" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -40,9 +51,12 @@
                             <tr *ngFor="let shipment of listShipments" class="text-start">
                                 <td><i class="fa-solid fa-location-dot mr-2 text-black"></i></td>
                                 <td>{{shipment.identification}}</td>
-                                <td>{{shipment.status}}</td>
+                                <td *ngIf="shipment.status === 'start'">Iniciado</td>
+                                <td *ngIf="shipment.status === 'process'">En proceso</td>
+                                <td *ngIf="shipment.status === 'done'">Terminado</td>
+                                <td *ngIf="shipment.status === 'cancel'">Cancelado</td>
                                 <td>
-                                    <button class="btn btn-success shadow" [disabled]="!shipment.latitudInput && !shipment.longitudInput" data-dismiss="modal" (click)="selectShipments(shipment.latitudInput, shipment.longitudInput);map.selectedShipment();getAllShipments();"><i class="fa-solid fa-play"></i> Iniiciar</button>
+                                    <button class="btn btn-success shadow" [disabled]="!shipment.latitudInput && !shipment.longitudInput" data-dismiss="modal" (click)="selectShipments(shipment.latitudInput, shipment.longitudInput);setStatusShipments(shipment.id, 'process');map.selectedShipment();getAllShipments();"><i class="fa-solid fa-play"></i> Empezar</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -51,7 +65,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>

@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class DocumentsService {
 
-  // url = 'https://api-rcs-lqtwb.ondigitalocean.app/api/documents';
-  url = 'http://127.0.0.1:8000/api/documents';
+  url = 'http://134.209.77.94/api/documents';
+  // url = 'http://127.0.0.1:8000/api/documents';
 
   constructor(private http: HttpClient) { }
 

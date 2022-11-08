@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class MessengersService {
 
-  // url = 'https://api-rcs-lqtwb.ondigitalocean.app/api/deliverys';
-  url = 'http://127.0.0.1:8000/api/deliverys';
+  url = 'http://134.209.77.94/api/deliverys';
+  // url = 'http://127.0.0.1:8000/api/deliverys';
 
   constructor(private http: HttpClient) { }
 

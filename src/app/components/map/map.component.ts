@@ -16,15 +16,15 @@ export class MapComponent implements AfterViewInit {
   latlngs: any;
 
   private map: any;
-  private template  = '';
-  private select_t  = '';
-  private identification  = '';
+  private template = '';
+  private select_t = '';
+  private identification = '';
   private id = 0;
   private delivery = 0;
 
   private initMap(): void {
     this.map = L.map('map', {
-      center: [ 18.476595094005752, -69.96001989489487 ],
+      center: [18.476595094005752, -69.96001989489487],
       zoom: 8
     });
 
@@ -42,28 +42,28 @@ export class MapComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initMap();
-    setTimeout(()=>{
+    setTimeout(() => {
       // setInterval(()=>{
-        this.myUbication();
+      this.myUbication();
 
       // },3000)
-    },4000);
+    }, 4000);
   }
 
   selectedShipment(): void {
     L.marker([this.latitud, this.longitud],
-      {alt: 'Kyiv'}).addTo(this.map); // "Kyiv" is the accessible name of this marker
-      // .bindPopup(`<center>
-      // <img src="../../../assets/img/messenger.svg" width="80%">
-      // ${this.select_t }
-      // <button class="btn btn-primary"><i class="fa-regular fa-moped"></i> Enviar mensajero</button>
-      // </center>`);
+      { alt: 'Kyiv' }).addTo(this.map); // "Kyiv" is the accessible name of this marker
+    // .bindPopup(`<center>
+    // <img src="../../../assets/img/messenger.svg" width="80%">
+    // ${this.select_t }
+    // <button class="btn btn-primary"><i class="fa-regular fa-moped"></i> Enviar mensajero</button>
+    // </center>`);
 
     this.map.flyTo([this.latitud, this.longitud], 15);
   }
 
   myUbication(): void {
-    L.marker([this.latitud, this.longitud], {alt: 'Kyiv'}).addTo(this.map); 
+    L.marker([this.latitud, this.longitud], { alt: 'Kyiv' }).addTo(this.map);
     this.map.flyTo([this.latitud, this.longitud]);
   }
 

@@ -68,7 +68,7 @@ export class UsersComponent implements OnInit {
 
     this.loading = true;
     let datos = new FormData();
-    datos.append("entity",this.entity);
+    datos.append("entity_id",this.entity);
     datos.append("name",this.name);
     datos.append("identification",this.identification);
     datos.append("role",this.role);

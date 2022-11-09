@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ShipmentsService {
 
-  url = 'https://rcs-api-services-iffsq.ondigitalocean.app/api/deliverys';
+  url = 'https://rcs-api-services-iffsq.ondigitalocean.app/api/shipments';
   // url = 'http://127.0.0.1:8000/api/shipments';
 
   constructor(private http: HttpClient) { }

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class EntitiesService {
 
-  url = 'http://134.209.77.94/api/entities';
+  url = 'https://rcs-api-services-iffsq.ondigitalocean.app/api/entities';
   // url = 'http://127.0.0.1:8000/api/entities';
 
   constructor(private http: HttpClient) { }

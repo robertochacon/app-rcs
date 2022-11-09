@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthenticationService {
 
-  url = 'http://134.209.77.94/api/login';
+  url = 'https://rcs-api-services-iffsq.ondigitalocean.app/api/login';
   // url = 'http://127.0.0.1:8000/api/login';
 
   constructor(private http: HttpClient) { }

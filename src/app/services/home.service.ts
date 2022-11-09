@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class HomeService {
 
-  url = 'http://134.209.77.94/api/home';
+  url = 'https://rcs-api-services-iffsq.ondigitalocean.app/api/home';
   // url = 'http://127.0.0.1:8000/api/home';
 
   constructor(private http: HttpClient) { }

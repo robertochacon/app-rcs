@@ -62,6 +62,12 @@ export class MessengerComponent implements OnInit {
 
   }
 
+  reloadDataTable(){
+    setTimeout(function(){
+      $('#listMessengers').DataTable();
+    },100);
+  }
+
   getFile(event: any){
     this.file = event.target.files[0];
   }

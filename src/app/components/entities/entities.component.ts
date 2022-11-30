@@ -45,6 +45,12 @@ export class EntitiesComponent implements OnInit {
 
   }
 
+  reloadDataTable(){
+    setTimeout(function(){
+      $('#listEntities').DataTable();
+    },100);
+  }
+
   getFile(event: any){
     this.file = event.target.files[0];
   }

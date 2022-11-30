@@ -49,6 +49,12 @@ export class UsersComponent implements OnInit {
 
   }
 
+  reloadDataTable(){
+    setTimeout(function(){
+      $('#listUsers').DataTable();
+    },100);
+  }
+
   getAllEntities(){
     this._entities.getAllEntities().subscribe((response)=>{
       this.listEntities = response.data;

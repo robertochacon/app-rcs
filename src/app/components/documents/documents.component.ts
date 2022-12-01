@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 declare const $: any;
 
 @Component({
@@ -19,8 +20,9 @@ export class DocumentsComponent implements OnInit {
   description = '';
   file: any = [];
   listDocuments: any[] = [];
+  documentFile!: SafeResourceUrl;
 
-  constructor(private _documents: DocumentsService) { }
+  constructor(private _documents: DocumentsService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.getAllDocuments();
@@ -109,6 +111,20 @@ export class DocumentsComponent implements OnInit {
         this.result = 'fail-delete';
       })
     }
+  }
+
+  downloadPDF(pdf: string) {
+    const linkSource = `data:application/pdf;base64,${pdf}`;
+    const downloadLink = document.createElement("a");
+    const fileName = "resultados.pdf";
+
+    downloadLink.href = linkSource;
+    downloadLink.download = fileName;
+    downloadLink.click();
+  }
+
+  showPDF(pdf: string) {
+    this.documentFile = this.sanitizer.bypassSecurityTrustResourceUrl(`data:application/pdf;base64,${pdf}`);
   }
 
 }

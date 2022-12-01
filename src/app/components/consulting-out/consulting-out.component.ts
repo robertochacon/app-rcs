@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DocumentsService } from 'src/app/services/documents.service';
 import { ShipmentsService } from 'src/app/services/shipments.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-consulting-out',
@@ -19,8 +20,9 @@ export class ConsultingOutComponent implements OnInit {
   longitudInput: any;
   time = '';
   note = '';
+  documentFile!: SafeResourceUrl;
 
-  constructor(private _documents: DocumentsService, private _shipments: ShipmentsService) { }
+  constructor(private _documents: DocumentsService, private _shipments: ShipmentsService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
   }
@@ -113,6 +115,20 @@ export class ConsultingOutComponent implements OnInit {
       this.status = ''
     }, 5000);
 
+  }
+
+  downloadPDF(pdf: any) {
+    const linkSource = `data:application/pdf;base64,${pdf}`;
+    const downloadLink = document.createElement("a");
+    const fileName = "resultados.pdf";
+
+    downloadLink.href = linkSource;
+    downloadLink.download = fileName;
+    downloadLink.click();
+  }
+
+  showPDF(pdf: string) {
+    this.documentFile = this.sanitizer.bypassSecurityTrustResourceUrl(`data:application/pdf;base64,${pdf}`);
   }
 
 }

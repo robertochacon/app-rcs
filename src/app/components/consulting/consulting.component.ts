@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DocumentsService } from 'src/app/services/documents.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-consulting',
@@ -14,8 +15,9 @@ export class ConsultingComponent implements OnInit {
   session = false;
   result = '';
   location = false;
+  documentFile!: SafeResourceUrl;
 
-  constructor(private _documents: DocumentsService) { }
+  constructor(private _documents: DocumentsService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     const session = localStorage.getItem('token');
@@ -57,6 +59,20 @@ export class ConsultingComponent implements OnInit {
 
   back(){
     this.step = 1;
+  }
+
+  downloadPDF(pdf: string) {
+    const linkSource = `data:application/pdf;base64,${pdf}`;
+    const downloadLink = document.createElement("a");
+    const fileName = "resultados.pdf";
+
+    downloadLink.href = linkSource;
+    downloadLink.download = fileName;
+    downloadLink.click();
+  }
+
+  showPDF(pdf: string) {
+    this.documentFile = this.sanitizer.bypassSecurityTrustResourceUrl(`data:application/pdf;base64,${pdf}`);
   }
 
 }

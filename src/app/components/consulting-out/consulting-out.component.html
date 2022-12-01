@@ -63,15 +63,31 @@
                                 <p><b>Nombre:</b><br> {{ document.name }}</p>
                                 <p><b>Descripcion:</b><br> {{ document.description }}</p>
                                 <p><b>Fecha:</b><br>{{ getDate(document.created_at) }}</p>
-                                <a href="https://rcs-api-services-iffsq.ondigitalocean.app/storage/{{ document.file }}" style="width:100%;" target="_blank" class="btn btn-success text-white btn-lg m-1"><i class="fa-solid fa-eye"></i> Ver</a>
+                                <a (click)="step=3;showPDF(document.file)" style="width:100%;" class="btn btn-success text-white btn-lg m-1"><i class="fa-solid fa-eye"></i> Ver</a>
                                 <!-- <a style="width:100%;" target="_blank" class="btn btn-info text-white btn-lg m-1"><i class="fa-solid fa-envelope"></i> Correo</a> -->
                                 <a style="width:100%;" target="_blank" class="btn btn-danger text-white btn-lg m-1" (click)="getLocation(document.entity_id)"><i class="fa-solid fa-location-dot"></i> Localizame</a>
-                                <a href="https://rcs-api-services-iffsq.ondigitalocean.app/storage/{{ document.file }}" style="width:100%;" class="btn btn-warning text-white btn-lg m-1" download><i class="fa-solid fa-download"></i> Descargar</a>
+                                <a (click)="downloadPDF(document.file)" style="width:100%;" class="btn btn-warning text-white btn-lg m-1"><i class="fa-solid fa-download"></i> Descargar</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="p-5" *ngIf="step===3">
+        <div class="row">
+            <h3>Visualizar documento</h3>
+            <div class="col-6 text-start">
+                <a class="btn btn-secondary mt-1" (click)="step=2"><span><i class="fa-solid fa-arrow-left"></i></span></a>
+            </div>
+        </div>
+        <div class="row justify-content-around allscreen">
+
+            <div class="mt-2 col-lg-12 col-md-12 col-sm-12 text-center">
+                <iframe [src]="documentFile" style="height:100vh;" width="100%"></iframe>
+            </div>
+
         </div>
     </div>
 

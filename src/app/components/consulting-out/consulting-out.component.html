@@ -2,21 +2,21 @@
 
     <div class="container" *ngIf="step!==3">
 
-        <div class="row justify-content-center allscreen pt-2" *ngIf="step===1">
+        <div class="row justify-content-center allscreen pt-2" style="margin-top: -20px;" *ngIf="step===1">
 
             <div class="row">
-                <div class="col-6 text-start">
+                <div class="col-6 text-start" style="margin-top: -40px;">
                     <p routerLink="/home" class="btn btn-success" *ngIf="!session"><span><i class="fa-solid fa-house"></i></span></p>
                 </div>
             </div>
 
-            <div class="row justify-content-center" style="margin-top: -100px;">
+            <div class="row justify-content-center" style="margin-top: -200px;">
                 <div class="col-lg-5 col-md-5 col-sm-10 text-center">
                     <img src="../../../assets/img/search.svg" alt="" width="50%">
                 </div>
             </div>
 
-            <div class="col-lg-8 col-md-12 col-sm-12 shadow p-5 text-center border-radio" style="margin-top: -200px;">
+            <div class="col-lg-8 col-md-12 col-sm-12 shadow p-5 text-center border-radio" style="margin-top: -100px;">
                 <div class="alert alert-info" role="alert" *ngIf="result === 'noFound'">
                     No se encuentran resultados.
                 </div>
@@ -34,7 +34,7 @@
                 </button>
             </div>
 
-            <div class="row justify-content-center" style="margin-top: -250px;">
+            <div class="row justify-content-center" style="margin-top: -100px;">
                 <div class="col-lg-5 col-md-5 col-sm-10 text-center text-dark mt-3">
                     <h5>Consulta tus resultados de una forma mas rapida sin contra tiempos!</h5>
                 </div>
@@ -42,7 +42,7 @@
 
         </div>
 
-        <div class="row justify-content-center allscreen" style="margin-top:-100px;" *ngIf="step===2">
+        <div class="row justify-content-center allscreen" style="margin-top:-20px;" *ngIf="step===2">
             <div class="col-lg-11 col-md-11 col-sm-11 text-center">
                 <div class="row justify-content-around">
                     <div class="col-6 text-start">
@@ -79,15 +79,15 @@
 
     </div>
 
-    <div class="p-5" *ngIf="step===3">
+    <div *ngIf="step===3">
         <div class="row">
 
             <div class="row justify-content-around">
-                <div class="col-6 text-start">
+                <div class="col-4 text-start">
                     <p class="btn btn-secondary mt-1" (click)="back()"><span><i class="fa-solid fa-arrow-left"></i></span></p>
                     <p routerLink="/home" class="btn btn-success ml-2 mt-1" *ngIf="!session"><span><i class="fa-solid fa-house"></i></span></p>
                 </div>
-                <div class="col-6 pt-2 text-end text-success">
+                <div class="col-8 pt-2 text-end text-success">
                     <h4><b>Visualizar documento</b></h4>
                 </div>
             </div>

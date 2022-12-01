@@ -1,29 +1,33 @@
 <app-navbar></app-navbar>
+<div class="fc">
 
-<div class="container">
+    <div class="container">
 
-    <div class="row justify-content-center allscreen pt-5">
+        <div class="row justify-content-center allscreen pt-5">
 
-        <div class="row justify-content-center pt-5">
-            <div class="col-lg-5 col-md-5 col-sm-10 text-center">
-                <img src="../../../assets/img/login.svg" alt="" width="50%">
-                <h2></h2>
+            <div class="row justify-content-center pt-5">
+                <div class="col-lg-5 col-md-5 col-sm-10 text-center">
+                    <img src="../../../assets/img/login.svg" alt="" width="50%">
+                    <h2></h2>
+                </div>
             </div>
-        </div>
 
-        <div class="col-lg-6 col-md-12 col-sm-12 shadow p-5 text-center border-radio">
-            <div class="alert alert-danger" role="alert" *ngIf="loginError">
-                Su identificacion o su clave esta incorrecta, verifique y vuelva a intentar
+            <div class="col-lg-6 col-md-12 col-sm-12 shadow p-5 text-center border-radio">
+                <div class="alert alert-danger" role="alert" *ngIf="loginError">
+                    Su identificacion o su clave esta incorrecta, verifique y vuelva a intentar
+                </div>
+                <h5 for="">Credenciales de usuario</h5>
+                <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Digite su identificacion">
+                <input type="password" [(ngModel)]="password" class="form-control shadow mt-3" maxLength="11" placeholder="Digite su clave">
+                <button *ngIf="!loading" class="btn btn-success btn-block btn-lg mt-3 shadow" [disabled]="identification === '' && password === ''" (click)="login()">
+                    Ingresar
+                </button>
+                <button *ngIf="loading" class="btn btn-success btn-block btn-lg mt-3 shadow">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Ingresando...
+                </button>
             </div>
-            <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Digite su identificacion">
-            <input type="password" [(ngModel)]="password" class="form-control shadow mt-3" maxLength="11" placeholder="Digite su clave">
-            <button *ngIf="!loading" class="btn btn-success btn-block btn-lg mt-3 shadow" [disabled]="identification === '' && password === ''" (click)="login()">
-                Ingresar
-            </button>
-            <button *ngIf="loading" class="btn btn-success btn-block btn-lg mt-3 shadow">
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                Ingresando...
-            </button>
+
         </div>
 
     </div>

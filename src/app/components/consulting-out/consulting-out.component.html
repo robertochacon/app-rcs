@@ -1,14 +1,14 @@
 <div class="fc">
 
-    <div class="container">
-
-        <div class="row mt-2" *ngIf="!session">
-            <div class="col-6 text-start">
-                <p routerLink="/home" class="btn btn-secondary mt-1"><span><i class="fa-solid fa-house"></i></span></p>
-            </div>
-        </div>
+    <div class="container" *ngIf="step!==3">
 
         <div class="row justify-content-center allscreen pt-2" *ngIf="step===1">
+
+            <div class="row">
+                <div class="col-6 text-start">
+                    <p routerLink="/home" class="btn btn-success" *ngIf="!session"><span><i class="fa-solid fa-house"></i></span></p>
+                </div>
+            </div>
 
             <div class="row justify-content-center" style="margin-top: -100px;">
                 <div class="col-lg-5 col-md-5 col-sm-10 text-center">
@@ -47,6 +47,7 @@
                 <div class="row justify-content-around">
                     <div class="col-6 text-start">
                         <p class="btn btn-secondary mt-1" (click)="back()"><span><i class="fa-solid fa-arrow-left"></i></span></p>
+                        <p routerLink="/home" class="btn btn-success ml-2 mt-1" *ngIf="!session"><span><i class="fa-solid fa-house"></i></span></p>
                     </div>
                     <div class="col-6 pt-2 text-end text-success">
                         <h4><b>Resultados</b></h4>
@@ -76,25 +77,32 @@
             </div>
         </div>
 
-        <div class="p-5" *ngIf="step===3">
-            <div class="row">
-                <h3>Visualizar documento</h3>
-                <div class="col-6 text-start">
-                    <a class="btn btn-secondary mt-1" (click)="step=2"><span><i class="fa-solid fa-arrow-left"></i></span></a>
-                </div>
-            </div>
-            <div class="row justify-content-around allscreen">
-
-                <div class="mt-2 col-lg-12 col-md-12 col-sm-12 text-center">
-                    <iframe [src]="documentFile" style="height:100vh;" width="100%"></iframe>
-                </div>
-
-            </div>
-        </div>
-
     </div>
 
-    <div *ngIf="status!==''" class="row justify-content-center align-items-center ventana-total">
+    <div class="p-5" *ngIf="step===3">
+        <div class="row">
+
+            <div class="row justify-content-around">
+                <div class="col-6 text-start">
+                    <p class="btn btn-secondary mt-1" (click)="back()"><span><i class="fa-solid fa-arrow-left"></i></span></p>
+                    <p routerLink="/home" class="btn btn-success ml-2 mt-1" *ngIf="!session"><span><i class="fa-solid fa-house"></i></span></p>
+                </div>
+                <div class="col-6 pt-2 text-end text-success">
+                    <h4><b>Visualizar documento</b></h4>
+                </div>
+            </div>
+
+        </div>
+        <div class="row justify-content-around allscreen">
+
+            <div class="mt-2 col-lg-12 col-md-12 col-sm-12 text-center">
+                <iframe [src]="documentFile" style="height:100vh;" width="100%"></iframe>
+            </div>
+
+        </div>
+    </div>
+
+    <div *ngIf="status!=='' && step!==3" class="row justify-content-center align-items-center ventana-total">
         <div class="col-12 text-center">
             <div *ngIf="status!=='enviado'" class="spinner-border" style="width: 8rem; height: 8rem;" role="status">
                 <span class="sr-only">Loading...</span>

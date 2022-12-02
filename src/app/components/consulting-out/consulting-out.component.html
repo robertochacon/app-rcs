@@ -1,22 +1,22 @@
 <div class="fc">
 
-    <div class="container" *ngIf="step!==3">
-
-        <div class="row justify-content-center allscreen pt-2" style="margin-top: -20px;" *ngIf="step===1">
+    <!-- <div class="container" *ngIf="step!==3"> -->
+    <div *ngIf="step===1">
+        <div class="row justify-content-center allscreen">
 
             <div class="row">
-                <div class="col-6 text-start" style="margin-top: -40px;">
-                    <p routerLink="/home" class="btn btn-success" *ngIf="!session"><span><i class="fa-solid fa-house"></i></span></p>
+                <div class="col-6 text-start">
+                    <p routerLink="/home" class="btn btn-success mt-1" *ngIf="!session"><span><i class="fa-solid fa-house"></i></span></p>
                 </div>
             </div>
 
-            <div class="row justify-content-center" style="margin-top: -150px;">
+            <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-5 col-sm-10 text-center">
                     <img src="../../../assets/img/search.svg" alt="" width="50%">
                 </div>
             </div>
 
-            <div class="col-lg-8 col-md-12 col-sm-12 shadow p-5 text-center border-radio" style="margin-top: -100px;">
+            <div class="col-lg-8 col-md-12 col-sm-12 shadow p-5 text-center border-radio">
                 <div class="alert alert-info" role="alert" *ngIf="result === 'noFound'">
                     No se encuentran resultados.
                 </div>
@@ -26,23 +26,26 @@
                 <h3 style="font-weight:800;">Buscar resultados</h3>
                 <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Digite un codigo">
                 <button *ngIf="!loading" class="btn btn-success btn-block btn-lg mt-3 shadow" [disabled]="identification === ''" (click)="search()">
-                    Consultar
-                </button>
+                        Consultar
+                    </button>
                 <button *ngIf="loading" class="btn btn-success btn-block btn-lg mt-3 shadow" [disabled]="identification === ''" (click)="search()">
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    Buscando...
-                </button>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Buscando...
+                    </button>
             </div>
 
-            <div class="row justify-content-center" style="margin-top: -130px;">
+            <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-5 col-sm-10 text-center text-dark mt-3">
                     <h5>Consulta tus resultados de una forma mas rapida sin contra tiempos!</h5>
                 </div>
             </div>
 
         </div>
+    </div>
 
-        <div class="row justify-content-center allscreen" style="margin-top:-20px;" *ngIf="step===2">
+
+    <div *ngIf="step===2">
+        <div class="row justify-content-center allscreen">
             <div class="col-lg-11 col-md-11 col-sm-11 text-center">
                 <div class="row justify-content-around">
                     <div class="col-6 text-start">
@@ -58,13 +61,15 @@
 
                         <div class="card shadow d-flex-sm justify-content-space-around">
                             <div class="card-body ">
-                                <div class="p-2">
-                                    <img class="" width="100px" src="../../../assets/img/pdf.png" alt="File">
-                                </div>
+                                <!-- <div class="p-2">
+                                        <img class="" width="100px" src="../../../assets/img/pdf.png" alt="File">
+                                    </div> -->
                                 <div class="text-start">
-                                    <p><b>Nombre:</b><br> {{ document.name }}</p>
-                                    <p><b>Descripcion:</b><br> {{ document.description }}</p>
-                                    <p><b>Fecha:</b><br>{{ getDate(document.created_at) }}</p>
+                                    <div class="alert alert-secondary" role="alert">
+                                        <p><b>Nombre:</b><br> {{ document.name }}</p>
+                                        <p><b>Descripcion:</b><br> {{ document.description }}</p>
+                                        <span class="badge bg-secondary"><b>Fecha: {{ getDate(document.created_at) | date:'dd/MM/yyyy' }}</b></span>
+                                    </div>
                                     <a (click)="step=3;showPDF(document.file)" style="width:100%;" class="btn btn-success text-white btn-lg m-1"><i class="fa-solid fa-eye"></i> Ver</a>
                                     <!-- <a style="width:100%;" target="_blank" class="btn btn-info text-white btn-lg m-1"><i class="fa-solid fa-envelope"></i> Correo</a> -->
                                     <a style="width:100%;" target="_blank" class="btn btn-danger text-white btn-lg m-1" (click)="getLocation(document.entity_id)"><i class="fa-solid fa-location-dot"></i> Localizame</a>
@@ -76,15 +81,16 @@
                 </div>
             </div>
         </div>
-
     </div>
+
+    <!-- </div> -->
 
     <div *ngIf="step===3">
         <div class="row">
 
             <div class="row justify-content-around">
                 <div class="col-4 text-start">
-                    <p class="btn btn-secondary mt-1" (click)="back()"><span><i class="fa-solid fa-arrow-left"></i></span></p>
+                    <p class="btn btn-secondary mt-1" (click)="step=2"><span><i class="fa-solid fa-arrow-left"></i></span></p>
                     <p routerLink="/home" class="btn btn-success ml-2 mt-1" *ngIf="!session"><span><i class="fa-solid fa-house"></i></span></p>
                 </div>
                 <div class="col-8 pt-2 text-end text-success">

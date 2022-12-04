@@ -21,6 +21,7 @@ export class ConsultingOutComponent implements OnInit {
   time = '';
   note = '';
   documentFile!: SafeResourceUrl;
+  entity_id_modal: any;
 
   constructor(private _documents: DocumentsService, private _shipments: ShipmentsService, private sanitizer: DomSanitizer) { }
 
@@ -60,7 +61,11 @@ export class ConsultingOutComponent implements OnInit {
     this.step = 1;
   }
 
-  getLocation(entity_id: any): void{
+  setIdentification(entity_id: any): void{
+    this.entity_id_modal = entity_id;
+  }
+
+  getLocation(): void{
     this.status = 'location'
     
     if (navigator.geolocation) { //check if geolocation is available
@@ -71,7 +76,7 @@ export class ConsultingOutComponent implements OnInit {
 
             this.latitudInput = position.coords.latitude;
             this.longitudInput = position.coords.longitude;
-            this.save(entity_id);
+            this.save(this.entity_id_modal);
         }else{
           this.status = 'fail'
           this.status = ''

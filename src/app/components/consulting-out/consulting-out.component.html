@@ -70,10 +70,11 @@
                                         <p><b>Descripcion:</b><br> {{ document.description }}</p>
                                         <span class="badge bg-secondary"><b>Fecha: {{ getDate(document.created_at) | date:'dd/MM/yyyy' }}</b></span>
                                     </div>
-                                    <a (click)="step=3;showPDF(document.file)" style="width:100%;" class="btn btn-success text-white btn-lg m-1"><i class="fa-solid fa-eye"></i> Ver</a>
+                                    <a (click)="step=3;showPDF(document.file)" style="width:100%;" class="btn btn-success text-white btn-lg m-1 d-flex justify-content-between">Visualizar <i class="fa-solid fa-eye"></i></a>
                                     <!-- <a style="width:100%;" target="_blank" class="btn btn-info text-white btn-lg m-1"><i class="fa-solid fa-envelope"></i> Correo</a> -->
-                                    <a style="width:100%;" target="_blank" class="btn btn-danger text-white btn-lg m-1" (click)="getLocation(document.entity_id)"><i class="fa-solid fa-location-dot"></i> Localizame</a>
-                                    <a (click)="downloadPDF(document.file)" style="width:100%;" class="btn btn-warning text-white btn-lg m-1"><i class="fa-solid fa-download"></i> Descargar</a>
+                                    <a style="width:100%;" target="_blank" class="btn btn-danger text-white btn-lg m-1 d-flex justify-content-between" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="setIdentification(document.entity_id)">Enviar aqui<i class="fa-solid fa-location-dot"></i></a>
+                                    <!-- <a style="width:100%;" target="_blank" class="btn btn-danger text-white btn-lg m-1 d-flex justify-content-between" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getLocation(document.entity_id)">Enviar aqui<i class="fa-solid fa-location-dot"></i> </a> -->
+                                    <a (click)="downloadPDF(document.file)" style="width:100%;" class="btn btn-warning text-white btn-lg m-1 d-flex justify-content-between">Descargar <i class="fa-solid fa-download"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -117,6 +118,26 @@
             <h2 *ngIf="status==='enviando'" class="text-white">Enviando solicitud</h2>
             <h2 *ngIf="status==='enviado'" class="text-white">Solicitud enviada</h2>
             <h2 *ngIf="status==='fail'" class="text-white">No se pudo obtener su ubicacion</h2>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-location-dot text-dark"></i> Localización</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5><b>Importante!</b></h5>
+                    <h6>Antes de hacer click en el boton enviar tomar en cuenta que tienes que activar geolocalización en tu dispositivo.</h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="getLocation()">Enviar</button>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -81,7 +81,7 @@
                     </div>
                     <h5>Información general</h5>
                     <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Digite una identificacion">
-                    <input type="text" [(ngModel)]="name" class="form-control shadow mt-3" maxLength="11" placeholder="Digite un nombre">
+                    <input type="text" [(ngModel)]="name" class="form-control shadow mt-3" maxLength="50" placeholder="Digite un nombre">
                     <textarea [(ngModel)]="description" class="form-control shadow mt-3" rows="3" placeholder="Digite una descripcion"></textarea>
                     <input (change)="getFile($event)" type="file" class="form-control shadow mt-3" accept="application/pdf">
                     <button *ngIf="!loading" [disabled]="name==='' || identification==='' || description===''" class="btn btn-success btn-block btn-lg mt-3 mb-3 shadow" (click)="save()">

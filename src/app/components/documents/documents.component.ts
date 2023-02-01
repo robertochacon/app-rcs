@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { HelperService } from '../../services/helper.service';
 declare const $: any;
 
 @Component({
@@ -21,8 +22,11 @@ export class DocumentsComponent implements OnInit {
   file: any = [];
   listDocuments: any[] = [];
   documentFile!: SafeResourceUrl;
+  helper_: any;
 
-  constructor(private _documents: DocumentsService, private sanitizer: DomSanitizer) { }
+  constructor(private _documents: DocumentsService, private sanitizer: DomSanitizer, private helper: HelperService) {
+    this.helper_ = helper;
+   }
 
   ngOnInit(): void {
     this.getAllDocuments();
@@ -124,7 +128,7 @@ export class DocumentsComponent implements OnInit {
   }
 
   showPDF(pdf: string) {
-    this.documentFile = this.sanitizer.bypassSecurityTrustResourceUrl(`data:application/pdf;base64,${pdf}`);
+    this.documentFile = this.sanitizer.bypassSecurityTrustResourceUrl(this.helper.getUrlForDocument(pdf));
   }
 
 }

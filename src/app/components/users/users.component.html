@@ -81,7 +81,7 @@
                         <option value="seleccionar">Seleccionar entidad</option>
                         <option *ngFor="let entitys of listEntities" value={{entitys.id}}>{{ entitys.name }}</option>
                     </select>
-                    <input type="text" [(ngModel)]="name" class="form-control shadow mt-3" maxLength="11" placeholder="Digite un nombre">
+                    <input type="text" [(ngModel)]="name" class="form-control shadow mt-3" maxLength="50" placeholder="Digite un nombre">
                     <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Digite una identificacion">
                     <select class="form-control shadow mt-3" [(ngModel)]="role">
                         <option value="user">Usuario</option>

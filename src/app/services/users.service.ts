@@ -1,16 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { HelperService } from './helper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
-  url = 'https://rcs-api-services-iffsq.ondigitalocean.app/api/users';
-  // url = 'http://127.0.0.1:8000/api/users';
+  url: string = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private helper: HelperService) { 
+    this.url =  helper.getUrl('users');
+  }
 
   getAllUsers(): Observable<any>{
     const url = this.url;

@@ -1,17 +1,18 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { HelperService } from './helper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  url = 'https://rcs-api-services-iffsq.ondigitalocean.app/api/login';
-  // url = 'http://127.0.0.1:8000/api/login';
+  url: string = '';
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient, private helper: HelperService) {
+    this.url =  helper.getUrl('login');
+   }
   login(identification: string, password: string): Observable<any>{
     const url = this.url;
 

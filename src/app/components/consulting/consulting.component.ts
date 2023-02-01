@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DocumentsService } from 'src/app/services/documents.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { HelperService } from '../../services/helper.service';
 
 @Component({
   selector: 'app-consulting',
@@ -15,9 +16,14 @@ export class ConsultingComponent implements OnInit {
   session = false;
   result = '';
   location = false;
-  documentFile!: SafeResourceUrl;
+  helper_: any;
+  InfoGeneral: any;
+  documentFileIframe!: SafeResourceUrl;
 
-  constructor(private _documents: DocumentsService, private sanitizer: DomSanitizer) { }
+
+  constructor(private _documents: DocumentsService, private sanitizer: DomSanitizer, private helper: HelperService) { 
+    this.helper_ = helper;
+  }
 
   ngOnInit(): void {
     const session = localStorage.getItem('token');
@@ -47,6 +53,10 @@ export class ConsultingComponent implements OnInit {
     })
   }
 
+  details(json: any){
+    this.InfoGeneral = json;
+  }
+
   getFile(file: string): string{
     let f = file.split("/");
     return `storage/${f[1]}/${f[2]}`;
@@ -62,17 +72,16 @@ export class ConsultingComponent implements OnInit {
   }
 
   downloadPDF(pdf: string) {
-    const linkSource = `data:application/pdf;base64,${pdf}`;
     const downloadLink = document.createElement("a");
     const fileName = "resultados.pdf";
 
-    downloadLink.href = linkSource;
+    downloadLink.href = this.helper_.getUrlForDocument(pdf);
     downloadLink.download = fileName;
     downloadLink.click();
   }
 
   showPDF(pdf: string) {
-    this.documentFile = this.sanitizer.bypassSecurityTrustResourceUrl(`data:application/pdf;base64,${pdf}`);
+    this.documentFileIframe = this.sanitizer.bypassSecurityTrustResourceUrl(this.helper.getUrlForDocument(pdf));
   }
 
 }

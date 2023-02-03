@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { EntitiesService } from 'src/app/services/entities.service';
 import { UsersService } from 'src/app/services/users.service';
+import Swal from 'sweetalert2'
 declare const $: any;
 
 @Component({
@@ -82,31 +83,65 @@ export class UsersComponent implements OnInit {
 
     this._users.setUsers(datos).subscribe((response)=>{
       this.loading = false;
-      this.result = 'ok';
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Guardado correctamente!',
+        showConfirmButton: false,
+        timer: 2000
+      });
       this.reset();
-      console.log(response);
       this.getAllUsers();
     },error => {
-      this.result = 'fail';
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Problemas tecnicos!',
+        text: 'No se pudo completar el registro, favor intente nuevamente.',
+        showConfirmButton: false,
+        timer: 2000
+      });
       this.loading = false;
     })
-
-    setTimeout(() => {
-      this.result = '';
-      this.step = 2;
-    }, 5000);
 
   }
   
   delete(id: any): void {
-    if(confirm('Deseas eliminar este usuario?')){
+    Swal.fire({
+      title: 'Deseas eliminar este usuario?',
+      // text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: 'gray',
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+
       this._users.deleteUsers(id).subscribe((response)=>{
-        console.log(response);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Eliminado correctamente!',
+          showConfirmButton: false,
+          timer: 2000
+        });
         this.getAllUsers();
       },error => {
-        this.result = 'fail-delete';
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Problemas tecnicos!',
+          text: 'No se pudo completar el registro, favor intente nuevamente.',
+          showConfirmButton: false,
+          timer: 2000
+        });
       })
-    }
+    
+      }
+    })
+
   }
 
 

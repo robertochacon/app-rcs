@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { HelperService } from '../../services/helper.service';
+import Swal from 'sweetalert2'
 declare const $: any;
 
 @Component({
@@ -91,12 +92,24 @@ export class DocumentsComponent implements OnInit {
 
     this._documents.setDocuments(datos).subscribe((response)=>{
       this.loading = false;
-      this.result = 'ok';
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Guardado correctamente!',
+        showConfirmButton: false,
+        timer: 2000
+      });
       this.reset();
-      console.log(response);
       this.getAllDocuments();
     },error => {
-      this.result = 'fail';
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Problemas tecnicos!',
+        text: 'No se pudo completar el registro, favor intente nuevamente.',
+        showConfirmButton: false,
+        timer: 2000
+      });
       this.loading = false;
     })
 
@@ -107,22 +120,48 @@ export class DocumentsComponent implements OnInit {
   }
   
   delete(id: any): void {
-    if(confirm('Deseas eliminar este documento?')){
+    Swal.fire({
+      title: 'Deseas eliminar este documento?',
+      // text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: 'gray',
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+
       this._documents.deleteDocuments(id).subscribe((response)=>{
-        console.log(response);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Eliminado correctamente!',
+          showConfirmButton: false,
+          timer: 2000
+        });
         this.getAllDocuments();
       },error => {
-        this.result = 'fail-delete';
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Problemas tecnicos!',
+          text: 'No se pudo completar el registro, favor intente nuevamente.',
+          showConfirmButton: false,
+          timer: 2000
+        });
       })
-    }
+    
+      }
+    })
+
   }
 
   downloadPDF(pdf: string) {
-    const linkSource = `data:application/pdf;base64,${pdf}`;
     const downloadLink = document.createElement("a");
     const fileName = "resultados.pdf";
 
-    downloadLink.href = linkSource;
+    downloadLink.href = this.helper.getUrlForDocument(pdf);
     downloadLink.download = fileName;
     downloadLink.click();
   }

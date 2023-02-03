@@ -4,11 +4,11 @@
     <div *ngIf="step===1">
         <div class="row justify-content-center allscreen">
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-6 text-start">
                     <p routerLink="/home" class="btn btn-success mt-1" *ngIf="!session"><span><i class="fa-solid fa-house"></i></span></p>
                 </div>
-            </div>
+            </div> -->
 
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-5 col-sm-10 text-center">
@@ -50,7 +50,7 @@
                 <div class="row justify-content-around">
                     <div class="col-6 text-start">
                         <p class="btn btn-secondary mt-1" (click)="back()"><span><i class="fa-solid fa-arrow-left"></i></span></p>
-                        <p routerLink="/home" class="btn btn-success ml-2 mt-1" *ngIf="!session"><span><i class="fa-solid fa-house"></i></span></p>
+                        <!-- <p routerLink="/home" class="btn btn-success ml-2 mt-1" *ngIf="!session"><span><i class="fa-solid fa-house"></i></span></p> -->
                     </div>
                     <div class="col-6 pt-2 text-end text-success">
                         <h4><b>Resultados</b></h4>
@@ -72,7 +72,7 @@
                                     </div>
                                     <a (click)="step=3;showPDF(document.file)" style="width:100%;" class="btn btn-success text-white btn-lg m-1 d-flex justify-content-between">Visualizar <i class="fa-solid fa-eye"></i></a>
                                     <!-- <a style="width:100%;" target="_blank" class="btn btn-info text-white btn-lg m-1"><i class="fa-solid fa-envelope"></i> Correo</a> -->
-                                    <a style="width:100%;" target="_blank" class="btn btn-danger text-white btn-lg m-1 d-flex justify-content-between" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="setIdentification(document.entity_id)">Enviar aqui<i class="fa-solid fa-location-dot"></i></a>
+                                    <!-- <a style="width:100%;" target="_blank" class="btn btn-danger text-white btn-lg m-1 d-flex justify-content-between" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="setIdentification(document.entity_id)">Enviar aqui<i class="fa-solid fa-location-dot"></i></a> -->
                                     <!-- <a style="width:100%;" target="_blank" class="btn btn-danger text-white btn-lg m-1 d-flex justify-content-between" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getLocation(document.entity_id)">Enviar aqui<i class="fa-solid fa-location-dot"></i> </a> -->
                                     <a (click)="downloadPDF(document.file)" style="width:100%;" class="btn btn-warning text-white btn-lg m-1 d-flex justify-content-between">Descargar <i class="fa-solid fa-download"></i></a>
                                 </div>
@@ -92,7 +92,7 @@
             <div class="row justify-content-around">
                 <div class="col-4 text-start">
                     <p class="btn btn-secondary mt-1" (click)="step=2"><span><i class="fa-solid fa-arrow-left"></i></span></p>
-                    <p routerLink="/home" class="btn btn-success ml-2 mt-1" *ngIf="!session"><span><i class="fa-solid fa-house"></i></span></p>
+                    <!-- <p routerLink="/home" class="btn btn-success ml-2 mt-1" *ngIf="!session"><span><i class="fa-solid fa-house"></i></span></p> -->
                 </div>
                 <div class="col-8 pt-2 text-end text-success">
                     <h4><b>Visualizar documento</b></h4>

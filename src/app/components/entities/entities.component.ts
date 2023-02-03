@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { EntitiesService } from 'src/app/services/entities.service';
+import Swal from 'sweetalert2'
 declare const $: any;
 
 @Component({
@@ -75,30 +76,65 @@ export class EntitiesComponent implements OnInit {
 
     this._entities.setEntities(datos).subscribe((response)=>{
       this.loading = false;
-      this.result = 'ok';
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Guardado correctamente!',
+        showConfirmButton: false,
+        timer: 2000
+      });
       this.reset();
-      console.log(response);
       this.getAllEntities();
     },error => {
-      this.result = 'fail';
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Problemas tecnicos!',
+        text: 'No se pudo completar el registro, favor intente nuevamente.',
+        showConfirmButton: false,
+        timer: 2000
+      });
       this.loading = false;
     })
-
-    setTimeout(() => {
-      this.result = '';
-    }, 5000);
 
   }
   
   delete(id: any): void {
-    if(confirm('Deseas eliminar esta entidad?')){
-      this._entities.deleteEntities(id).subscribe((response)=>{
-        console.log(response);
-        this.getAllEntities();
-      },error => {
-        this.result = 'fail-delete';
-      })
-    }
+
+    Swal.fire({
+      title: 'Deseas eliminar esta entidad?',
+      // text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: 'gray',
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        this._entities.deleteEntities(id).subscribe((response)=>{
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Eliminada correctamente!',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          this.getAllEntities();
+        },error => {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Problemas tecnicos!',
+            text: 'No se pudo completar el registro, favor intente nuevamente.',
+            showConfirmButton: false,
+            timer: 2000
+          });
+        })
+
+      }
+    })
   }
 
 
